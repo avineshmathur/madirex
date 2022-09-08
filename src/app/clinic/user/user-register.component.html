@@ -1,0 +1,214 @@
+<div class="container-fluid">
+  <!-- Page Heading -->
+  <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">New User Registration</h1>
+    <button class="btn btn-primary" (click)="backClicked();">BACK</button>
+  </div>
+	<!--<tr *ngFor="let country of countries">
+      <th>{{country.name}}</th>
+	</tr>-->
+  <!-- Content Row -->
+  <div class="row">
+	<div class="col-xl-12 col-md-12 mb-4">
+      <div class="card shadow h-100 py-2">
+        <div class="card-body">
+          <div class="row no-gutters align-items-center">
+            <div class="col ">
+            	<form class="" [formGroup]="userRegisterForm" (ngSubmit)="submit()" novalidate>
+                
+                <div class="form-group row">
+                    <div class="col-sm-6 mb-3 mb-sm-0">
+											<label class="titleBold">First Name<span class="mandatorySign">*</span></label>
+                        <input type="text" class="form-control" id="inputFirstName" aria-describedby="newPasswordHelp" placeholder="First Name..." formControlName="firstName" [ngClass]="{ 'is-invalid': showErrors && !userRegisterForm.controls.firstName.valid }">
+                        <div *ngIf="showErrors && !userRegisterForm.controls.firstName.valid" class="invalid-feedback"> 
+                                    {{ attributes.firstName }}
+                        </div>
+                    </div>
+									
+                    <div class="col-sm-6">
+											<label class="titleBold">Last Name<span class="mandatorySign">*</span></label>
+                        <input type="text" class="form-control" id="inputLastName" aria-describedby="newPasswordHelp" placeholder="Last Name..." formControlName="lastName" [ngClass]="{ 'is-invalid': showErrors && !userRegisterForm.controls.lastName.valid }">
+						<div *ngIf="showErrors && !userRegisterForm.controls.lastName.valid" class="invalid-feedback"> 
+   								{{ attributes.lastName }}
+						</div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-6 mb-3 mb-sm-0">
+											<label class="titleBold">EmailAddress<span class="mandatorySign">*</span></label>
+                        <input type="email" class="form-control" id="inputEmailAddress" aria-describedby="newPasswordHelp" placeholder="Email Address..." formControlName="emailAddress" [ngClass]="{ 'is-invalid': showErrors && !userRegisterForm.controls.emailAddress.valid }">
+                        <div *ngIf="showErrors && !userRegisterForm.controls.emailAddress.valid" class="invalid-feedback"> 
+                            {{ attributes.emailAddress }}
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+											<label class="titleBold">Phone number</label>
+						<input type="text" class="form-control" id="inputPhoneNumber" aria-describedby="newPasswordHelp" placeholder="Phone Number...(Eg:- 1234567890)" formControlName="phoneNumber" [ngClass]="{ 'is-invalid': showErrors && !userRegisterForm.controls.phoneNumber.valid }">
+						<div *ngIf="showErrors && !userRegisterForm.controls.phoneNumber.valid" class="invalid-feedback"> 
+   							{{ attributes.phoneNumber }}
+						</div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-6 ">
+										<label class="titleBold">Username<span class="mandatorySign">*</span></label>
+                        <input type="text" class="form-control" id="inputUserName" aria-describedby="newPasswordHelp" placeholder="Username..." formControlName="username" [ngClass]="{ 'is-invalid': showErrors && !userRegisterForm.controls.username.valid }">
+                        <div *ngIf="showErrors && !userRegisterForm.controls.username.valid" class="invalid-feedback"> 
+                            {{ attributes.username }}
+                        </div> 
+                   </div>
+                   <div class="col-sm-6">
+                    <label class="titleBold">Select role<span class="mandatorySign">*</span></label>
+                    <select formControlName="role" class="form-control" [ngClass]="{ 'is-invalid': showErrors && !userRegisterForm.controls.role.valid }">
+                        <option value="">Select role...</option>
+                        <option *ngFor="let role of roles" [value]="role.id">{{role.title}}</option>
+                    </select>
+                    <div *ngIf="showErrors && !userRegisterForm.controls.role.valid" class="invalid-feedback"> 
+                        {{ attributes.roleId }}
+                    </div>
+                    </div>
+                    <!--<div class="col-sm-6">
+											<input type="text" class="form-control" id="inputPassword" aria-describedby="newPasswordHelp" placeholder="Password..." formControlName="password" [ngClass]="{ 'is-invalid': showErrors && !userRegisterForm.controls.password.valid }">
+											<div *ngIf="showErrors && !userRegisterForm.controls.password.valid" class="invalid-feedback"> 
+													{{ attributes.password }}
+											</div>
+                    </div>-->
+                </div>
+                <div class="form-group row">
+                    <!-- <div class="col-sm-6 mb-3 mb-sm-0">
+											<label class="titleBold">Date of birth<span class="mandatorySign">*</span></label>
+						<input [max]="getToday()" type="date" class="form-control" id="inputDateOfBirth" aria-describedby="newPasswordHelp" placeholder="Start Date..." formControlName="dateOfBirth" [ngClass]="{ 'is-invalid': showErrors && !userRegisterForm.controls.dateOfBirth.valid }">
+						<div *ngIf="showErrors && !userRegisterForm.controls.dateOfBirth.valid" class="invalid-feedback"> 
+   								{{ attributes.dateOfBirth }}
+						</div>
+                    </div> -->
+                    <!-- <div class="col-sm-6">
+											<label class="titleBold">Select role<span class="mandatorySign">*</span></label>
+                        <select formControlName="role" class="form-control" [ngClass]="{ 'is-invalid': showErrors && !userRegisterForm.controls.role.valid }">
+                            <option value="">Select role...</option>
+                            <option *ngFor="let role of roles" [value]="role.id">{{role.title}}</option>
+                        </select>
+                        <div *ngIf="showErrors && !userRegisterForm.controls.role.valid" class="invalid-feedback"> 
+                            {{ attributes.roleId }}
+                        </div>
+                    </div> -->
+                </div>
+                <div class="form-group">
+									<label class="titleBold">Address</label>
+					<input type="text" class="form-control" id="inputAddress" aria-describedby="newPasswordHelp" placeholder="Address..." formControlName="address">
+					<!--<div *ngIf="showErrors && !userRegisterForm.controls.address.valid" class="invalid-feedback"> 
+   						{{ attributes.address }}
+					</div>-->
+                </div>
+                								
+				<div class="form-group row">
+                    <div class="col-sm-6 mb-3 mb-sm-0">
+											<label class="titleBold">Select country</label>
+                        <select formControlName="country" class="form-control" (change)="onChangeCountry($event.target.value)" [ngClass]="{ 'is-invalid': showErrors && !userRegisterForm.controls.country.valid }">
+                            <option value="">Select country...</option>
+                            <option *ngFor="let country of countries" [value]="country.id">{{country.name}}</option>
+                        </select>
+												
+                        <!-- <div *ngIf="showErrors && !userRegisterForm.controls.country.valid" class="invalid-feedback"> 
+                            {{ attributes.countryId }}
+                        </div> -->
+                    </div>
+										
+                    <div class="col-sm-6">
+											<label class="titleBold">Select state</label>
+                        <select formControlName="state" class="form-control" (change)="onChangeState($event.target.value)"  [ngClass]="{ 'is-invalid': showErrors && !userRegisterForm.controls.state.valid }">
+                            <option value="">Select state...</option>
+                            <option *ngFor="let state of states" [value]="state.id">{{state.name}}</option>
+                        </select>
+                        <!-- <div *ngIf="showErrors && !userRegisterForm.controls.state.valid" class="invalid-feedback"> 
+                            {{ attributes.stateId }}
+                        </div> -->
+                    </div>
+                </div>
+                
+                <div class="form-group row">
+                    <div class="col-sm-6 mb-3 mb-sm-0">
+											<label class="titleBold">Select city</label>
+												<select formControlName="city" class="form-control" [ngClass]="{ 'is-invalid': showErrors && !userRegisterForm.controls.city.valid }">
+													<option value="">Select city...</option>
+													<option *ngFor="let city of cities" [value]="city.id">{{city.name}}</option>
+												</select>
+                        <!-- <div *ngIf="showErrors && !userRegisterForm.controls.city.valid" class="invalid-feedback"> 
+                            {{ attributes.city }}
+                        </div> -->
+                    </div>
+                    <div class="col-sm-6">
+											<label class="titleBold">Zip code</label>
+                        <input type="number" class="form-control" id="inputZipCode" aria-describedby="newPasswordHelp" placeholder="Zip Code" formControlName="zipCode" >
+						<div *ngIf="showErrors && !userRegisterForm.controls.zipCode.valid" class="invalid-feedback"> 
+   							{{ attributes.zipCode }}
+						</div>
+                    </div>
+                </div>
+                
+                <!--<div class="form-group row">
+                    <div class="col-sm-6 mb-3 mb-sm-0">
+                        <input type="text" class="form-control" id="inputEmergencyContact" aria-describedby="newPasswordHelp" placeholder="Emergency Contact..." formControlName="emergencyContact" [ngClass]="{ 'is-invalid': showErrors && !userRegisterForm.controls.emergencyContact.valid }">
+                        <div *ngIf="showErrors && !userRegisterForm.controls.emergencyContact.valid" class="invalid-feedback"> 
+                            {{ attributes.emergencyContact }}
+										</div>
+                    </div>
+                    <div class="col-sm-6">
+                        <select formControlName="maritalStatus" class="form-control">
+													<option value="">Select one...</option>
+													<option value="Unmarried">Unmarried</option>
+													<option value="Married">Married</option>
+                        </select>
+                        <div *ngIf="showErrors && !userRegisterForm.controls.country.valid" class="invalid-feedback"> 
+                            {{ attributes.maritalStatus }}
+                        </div>
+                    </div>
+                </div>-->
+                <!--<div class="form-group row">
+                    <div class="col-sm-6 mb-3 mb-sm-0">
+                        <input type="file" id="profileImage" name="profileImage">
+                    </div>
+                </div>-->
+								
+								<div class="form-group row">
+									 <div class="col-sm-6 mb-3 mb-sm-0">
+											<!--<label>Profile</label>-->
+											<label class="titleBold">Upload Image</label>
+											<input type="file" (change)="fileChangeEvent($event)" formControlName="bizLogo"
+												accept=".png, .jpg, .jpeg" />
+												<small *ngIf="fileSizeValidation" class="text-danger">
+													{{ fileSizeValidation }}
+												</small>
+									 </div>
+								</div>
+								<div class="text-center col-md-6">
+						<div style="display: flex;
+				justify-content: center;
+				width: 100%">
+							<image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true"
+								[aspectRatio]="1/1" format="png"   [resizeToWidth]="172" 
+								(imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded()"
+								(cropperReady)="cropperReady()" (loadImageFailed)="loadImageFailed()"></image-cropper>
+						</div>
+					</div>
+					<div class="text-center col-md-6">
+
+						<img [src]="croppedImage" />
+					</div>
+                <!--<input type="hidden" value="1" formControlName="country" />
+								<input type="hidden" value="1" formControlName="state" />
+								<input type="hidden" value="1" formControlName="city" />-->
+								
+                <button type="submit" class="btn btn-primary btn-block">
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                        Register User
+                </button>
+                <hr>
+              </form> 
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

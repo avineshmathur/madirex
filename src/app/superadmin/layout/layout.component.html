@@ -1,0 +1,10 @@
+<div id="wrapper">
+	<sidebar *ngIf="isSuperAdminLoggedIn$ | async"></sidebar>
+	<div id="content-wrapper" class="d-flex flex-column">
+		<div id="content">
+			<superadmin-header *ngIf="isSuperAdminLoggedIn$ | async"></superadmin-header>
+			<router-outlet></router-outlet>
+		</div>
+		<superadmin-footer *ngIf="isSuperAdminLoggedIn$ | async"></superadmin-footer>
+	</div>
+</div>

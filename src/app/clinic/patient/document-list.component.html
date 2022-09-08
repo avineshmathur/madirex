@@ -1,0 +1,258 @@
+<!-- Begin Page Content -->
+        <div class="container-fluid">
+          <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Claim Document List</h1>
+            <button class="btn btn-primary" (click)="backClicked();">BACK</button>
+          </div>
+          
+          <div _ngcontent-c0="" class="col">
+            <ol _ngcontent-c0="" class="breadcrumb">
+            <li _ngcontent-c0="" class="breadcrumb-item">
+              <span class="breadcrumb_style"> WCAB: &nbsp; </span> {{this.WcabNo}}
+              </li>
+              <li _ngcontent-c0="" class="breadcrumb-item active">
+                <span class="breadcrumb_style">Claim No: &nbsp;</span>
+                <a  routerLink="/clinic/claim-detail/{{this.calimsId}}">          
+                  {{this.claimId}}</a>
+               
+               <!-- <span _ngcontent-c0="">{{this. claimId}}</span> -->
+              </li>
+              <li _ngcontent-c0="" class="breadcrumb-item active">
+                <span class="breadcrumb_style"> Patient Name: &nbsp;</span>
+                <span _ngcontent-c0="">{{this. name}}</span>
+               </li>
+            </ol>
+          </div>
+          <!--<p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p>-->
+
+          <!-- DataTales Example -->
+          <div class="card shadow mb-4">
+            <div class="card-header py-3">
+              <p *ngIf="loggedInClinicDetails.role_id == '1'  && claimStatus == 'completed'" style="float: right;">              
+                <a routerLink="/clinic/add-document/{{claimidurl}}" class="btn btn-success btn-icon-split">
+                  <span class="icon text-white-50">
+                    <i class="fas fa-plus"></i>
+                  </span>
+                  <span class="text">Add New Document/Transcript</span>
+                </a>
+              </p>
+              
+              <p *ngIf="loggedInClinicDetails.role_id == '1' && claimStatus == 'uploaded'" style="float: right;">
+                <a *ngIf="docCount != '0'" (click)="onUpdateClaimStatus(loggedInClinicDetails.id,loggedInClinicDetails.role_id,claimidurl,rowIndex)" class="btn btn-info btn-icon-split">
+                  <span class="icon text-white-50">
+                    <i class="fas fa-file"></i>
+                  </span>
+                  <span class="text">Send To Medpro</span>
+                </a>
+                &nbsp;
+                <!-- <a routerLink="/clinic/add-document/{{claimidurl}}" class="btn btn-success btn-icon-split">
+                  <span class="icon text-white-50">
+                    <i class="fas fa-plus"></i>
+                  </span>
+                  <span class="text">Add New Document/Transcript</span>
+                </a> -->
+              </p>
+              <!--<p *ngIf="loggedInClinicDetails.role_id == '5' && claimStatus == 'sent_to_medpro'" style="float: right;">
+                <a (click)="onUpdateClaimStatus(loggedInClinicDetails.id,loggedInClinicDetails.role_id,claimidurl)" class="btn btn-info btn-icon-split">
+                  <span class="icon text-white-50">
+                    <i class="fas fa-file"></i>
+                  </span>
+                  <span class="text">Reviewed By Medpro</span>
+                </a>
+                &nbsp;
+                <a routerLink="/clinic/add-document/{{claimidurl}}" class="btn btn-success btn-icon-split">
+                  <span class="icon text-white-50">
+                    <i class="fas fa-plus"></i>
+                  </span>
+                  <span class="text">Add New Document/Transcript</span>
+                </a>
+              </p>-->
+              <p *ngIf="loggedInClinicDetails.role_id == '5' && claimStatus == 'sent_to_medpro'" style="float: right;">
+                <a (click)="onUpdateClaimStatus(loggedInClinicDetails.id,loggedInClinicDetails.role_id,claimidurl)" class="btn btn-info btn-icon-split">
+                  <span class="icon text-white-50">
+                    <i class="fas fa-file"></i>
+                  </span>
+                  <span class="text">Reviewed By Medpro</span>
+                </a>
+                &nbsp;
+                <!-- <a routerLink="/clinic/add-document/{{claimidurl}}" class="btn btn-success btn-icon-split">
+                  <span class="icon text-white-50">
+                    <i class="fas fa-plus"></i>
+                  </span>
+                  <span class="text">Add New Document/Transcript</span>
+                </a> -->
+              </p>
+              <p *ngIf="loggedInClinicDetails.role_id == '5' && claimStatus == 'reviewed_by_medpro'" style="float: right;">
+                <a (click)="onUpdateClaimStatus(loggedInClinicDetails.id,loggedInClinicDetails.role_id,claimidurl)" class="btn btn-info btn-icon-split">
+                  <span class="icon text-white-50">
+                    <i class="fas fa-file"></i>
+                  </span>
+                  <span class="text">Sent To Doctor</span>
+                </a>
+                &nbsp;
+                <!-- <a routerLink="/clinic/add-document/{{claimidurl}}" class="btn btn-success btn-icon-split">
+                  <span class="icon text-white-50">
+                    <i class="fas fa-plus"></i>
+                  </span>
+                  <span class="text">Add New Document/Transcript</span>
+                </a> -->
+              </p>
+              <p *ngIf="loggedInClinicDetails.role_id == '4' && claimStatus == 'sent_to_doctor'" style="float: right;">
+                <a (click)="onUpdateClaimStatus(loggedInClinicDetails.id,loggedInClinicDetails.role_id,claimidurl)" class="btn btn-info btn-icon-split">
+                  <span class="icon text-white-50">
+                    <i class="fas fa-file"></i>
+                  </span>
+                  <span class="text">Reviewed By Doctor</span>
+                </a>
+                &nbsp;
+                <!-- <a routerLink="/clinic/add-document/{{claimidurl}}" class="btn btn-success btn-icon-split">
+                  <span class="icon text-white-50">
+                    <i class="fas fa-plus"></i>
+                  </span>
+                  <span class="text">Add New Document/Transcript</span>
+                </a> -->
+              </p>
+              
+              <p *ngIf="loggedInClinicDetails.role_id == '4' && claimStatus == 'reviewed_by_doctor'" style="float: right;">
+                <a (click)="onUpdateClaimStatus(loggedInClinicDetails.id,loggedInClinicDetails.role_id,claimidurl)" class="btn btn-info btn-icon-split">
+                  <span class="icon text-white-50">
+                    <i class="fas fa-file"></i>
+                  </span>
+                  <span class="text">Sent Back To Medpro</span>
+                </a>
+                &nbsp;
+                <!-- <a routerLink="/clinic/add-document/{{claimidurl}}" class="btn btn-success btn-icon-split">
+                  <span class="icon text-white-50">
+                    <i class="fas fa-plus"></i>
+                  </span>
+                  <span class="text">Add New Document/Transcript</span>
+                </a> -->
+              </p>
+              
+              <p *ngIf="loggedInClinicDetails.role_id == '5' && claimStatus == 'doctor_sent_to_medpro'" style="float: right;">
+                <a (click)="onUpdateClaimStatus(loggedInClinicDetails.id,loggedInClinicDetails.role_id,claimidurl)" class="btn btn-info btn-icon-split">
+                  <span class="icon text-white-50">
+                    <i class="fas fa-file"></i>
+                  </span>
+                  <span class="text">Sent Back To Clinic</span>
+                </a>
+                &nbsp;
+                <!-- <a routerLink="/clinic/add-document/{{claimidurl}}" class="btn btn-success btn-icon-split">
+                  <span class="icon text-white-50">
+                    <i class="fas fa-plus"></i>
+                  </span>
+                  <span class="text">Add New Document/Transcript</span>
+                </a> -->
+              </p>
+              
+              <p *ngIf="loggedInClinicDetails.role_id == '1' && claimStatus == 'medpro_sent_to_clinic'" style="float: right;">
+                <a (click)="onUpdateClaimStatus(loggedInClinicDetails.id,loggedInClinicDetails.role_id,claimidurl)" class="btn btn-info btn-icon-split">
+                  <span class="icon text-white-50">
+                    <i class="fas fa-file"></i>
+                  </span>
+                  <span class="text">Summery Generate</span>
+                </a>
+              </p>
+              <p *ngIf="loggedInClinicDetails.role_id == '1' && claimStatus == 'summary_generated'" style="float: right;">
+                <a (click)="onUpdateClaimStatus(loggedInClinicDetails.id,loggedInClinicDetails.role_id,claimidurl)" class="btn btn-info btn-icon-split">
+                  <span class="icon text-white-50">
+                    <i class="fas fa-file"></i>
+                  </span>
+                  <span class="text">Complete</span>
+                </a>
+              </p>
+              
+              <!--<p *ngIf="loggedInClinicDetails.role_id == '1'" style="float: right;">              
+                <a routerLink="/clinic/add-document/{{claimidurl}}" class="btn btn-success btn-icon-split">
+                  <span class="icon text-white-50">
+                    <i class="fas fa-plus"></i>
+                  </span>
+                  <span class="text">Add New Document/Transcript</span>
+                </a>
+              </p>-->
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-bordered" width="100%" cellspacing="0" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+                  <thead>
+                    <tr>
+                      <th>Document Name</th>
+                      <th>Document Note</th>
+                      <th>Uploaded By</th>
+                      <!--<th>Document Status</th>-->
+                      <th>Uploaded At</th>
+                      <th>ROR/Transcript Expected date</th>
+                      <th>MedPro Date</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <!--<tfoot>
+                    <tr>
+                      <th>Name</th>
+                      <th>Position</th>
+                      <th>Office</th>
+                      <th>Age</th>
+                      <th>Start date</th>
+                      <th>Salary</th>
+                    </tr>
+                  </tfoot>-->
+                  <tbody>
+                    <!--https://medirecx.s3.amazonaws.com/document/-->
+                    <tr *ngFor="let document of documents;let rowIndex = index">
+                      <td><a class="nav-link" target="_blank" href="{{docs3Path}}{{document.document_name}}">          
+                       {{document.original_file_name}}</a></td>
+                      <td>{{document.document_notes}}</td>
+                      <td>{{document.first_name}} {{document.last_name}}</td>
+                      <!--<td>{{document.document_status}}</td>-->
+                      <td>{{document.added_date | date:'MM/dd/yyyy'}}</td>
+                      <td>{{document.expected_date | date:'MM/dd/yyyy'}}</td>
+                      <td>{{ document.sent_to_medpro_date === null ? '-':  document.sent_to_medpro_date | date:'yyyy-MM-dd'}}</td>
+                      <td>
+                      
+                          <a routerLink="/clinic/update-document/{{document.id}}" class="btn btn-info btn-circle btn-sm" title="Update Document">
+                            <i class="fas fa-edit"></i>
+                          </a>&nbsp;
+                          
+                          <a routerLink="/clinic/send-message/{{document.claim_id}}/medpro" class="btn btn-info btn-circle btn-sm" title="Send Message">
+                            <i class="fas fa-envelope"></i>
+                          </a>&nbsp;
+                          <a *ngIf="claimStatus == 'uploaded'" (click)="onDelete(document.id)" class="btn btn-warning btn-circle btn-sm" title="Delete Document">
+                            <i class="fas fa-trash"></i>
+                          </a>
+                         
+                        
+                        <!--<a (click)="onUpdateStatus(document.id)" class="btn btn-info btn-circle btn-sm" title="Update Status">
+                          <i class="fas fa-paper-plane"></i>
+                        </a>&nbsp;-->
+                       
+                    
+                      </td>
+                    </tr>
+                    
+                   
+                    <!--<tr *ngFor="let document of document">
+                      <th>{{document.document_name}}</th>
+                      <td>{{document.document_notes}</td>
+                      <td>
+                        <a routerLink="/superadmin/client-update/{{client.id}}" class="btn btn-info btn-circle btn-sm">
+                          <i class="fas fa-edit"></i>
+                        </a>&nbsp;
+                        
+                          <a (click)="onUpdateStatus(client.id)" class="btn btn-warning btn-circle btn-sm">
+                            <i class="fas fa-toggle-on"></i>
+                          </a>&nbsp;
+                       
+                        <a (click)="onDelete(client.id)" class="btn btn-danger btn-circle btn-sm">
+                          <i class="fas fa-trash"></i>
+                        </a>
+                      </td>
+                    </tr>-->
+                   
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+        </div>
+<!-- /.container-fluid -->

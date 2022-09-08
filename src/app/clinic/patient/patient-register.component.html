@@ -1,0 +1,563 @@
+<div class="container-fluid">
+  <!-- Page Heading -->
+  <div class="d-sm-flex align-items-center justify-content-between mb-4">
+	<h1 class="h3 mb-0 text-gray-800">New Patient and Claim Registration</h1>
+	<button class="btn btn-primary" (click)="backClicked();">BACK</button>
+  </div>
+	<!--<tr *ngFor="let doctor of doctors">
+      <th>{{doctor.first_name}}</th>
+	</tr>-->
+  <!-- Content Row -->
+  <div class="row">
+	<div class="col-xl-12 col-md-12 mb-4">
+      <div class="card shadow h-100 py-2">
+        <div class="card-body">
+          <div class="row no-gutters align-items-center">
+            <div class="col ">
+				<form class="" [formGroup]="patientRegisterForm" (ngSubmit)="submit()" novalidate>
+				<div class="col ">
+					<div style="text-align: center;margin-top: 2%; margin-bottom: 2%;font-weight: bold; font-size: 21px;">Employee Information</div>
+					<div class="form-group row">
+						<div class="col-sm-4 mb-3 mb-sm-0">
+							<label class="titleBold">First Name<span class="mandatorySign">*</span></label>
+							<input type="text" class="form-control" id="inputFirstName" aria-describedby="newPasswordHelp" placeholder="First Name..." formControlName="firstName" [ngClass]="{ 'is-invalid': showErrors && !patientRegisterForm.controls.firstName.valid }">
+													<div *ngIf="showErrors && !patientRegisterForm.controls.firstName.valid" class="invalid-feedback"> 
+														{{ attributes.firstName }}
+													</div>
+						</div>
+																					
+						<div class="col-sm-4">
+							<label class="titleBold">Last Name<span class="mandatorySign">*</span></label>
+                        <input type="text" class="form-control" id="inputLastName" aria-describedby="newPasswordHelp" placeholder="Last Name..." formControlName="lastName" [ngClass]="{ 'is-invalid': showErrors && !patientRegisterForm.controls.lastName.valid }">
+												<div *ngIf="showErrors && !patientRegisterForm.controls.lastName.valid" class="invalid-feedback"> 
+													{{ attributes.lastName }}
+												</div>		
+					  
+						</div>
+						<div class="col-sm-4">
+						  <label class="titleBold">Date of Injury</label>
+						   <input [max]="getToday()" onfocus="(this.type='date')" type="text" class="form-control" placeholder="MM/DD/YYYY" class="form-control" id="inputdateOfInjury" aria-describedby="newPasswordHelp" formControlName="dateOfInjury" [ngClass]="{ 'is-invalid': showErrors && !patientRegisterForm.controls.dateOfInjury.valid }">
+							  <div *ngIf="showErrors && !patientRegisterForm.controls.dateOfInjury.valid" class="invalid-feedback"> 
+								  {{ attributes.dateOfInjury }}
+							  </div>				
+					   </div>
+					</div>
+					<div class="form-group row">
+						<div class="col-sm-4 mb-3 mb-sm-0">
+						 <label class="titleBold">Conatct Info</label>
+						
+						 <input type="text" class="form-control" id="inputContactInfo" aria-describedby="newPasswordHelp" placeholder="Conatct Info..." formControlName="contctInfo" >
+						</div>
+																					
+						<div class="col-sm-4">
+							
+							 <label class="titleBold">WCAB No.<span class="mandatorySign">*</span></label>
+							 <input type="text" class="form-control" id="inputWCABNo" placeholder="WCAB No..." formControlName="wcabNo" [ngClass]="{ 'is-invalid': showErrors && !patientRegisterForm.controls.wcabNo.valid }">
+													 <div *ngIf="showErrors && !patientRegisterForm.controls.wcabNo.valid" class="invalid-feedback"> 
+														 {{ attributes.wcabNo }}
+													 </div>		
+						</div>
+						<div class="col-sm-4">
+							<label class="titleBold">Claim or Case Number <span class="mandatorySign">*</span></label>
+							<input type="text" class="form-control" id="inputclaimNo" aria-describedby="newPasswordHelp" placeholder="Claim No..." formControlName="claimNo"[ngClass]="{ 'is-invalid': showErrors && !patientRegisterForm.controls.claimNo.valid }" >
+								<div *ngIf="showErrors && !patientRegisterForm.controls.claimNo.valid" class="invalid-feedback"> 
+								{{ attributes.claimNo }}
+							</div>				
+						</div>
+					</div>
+					<div class="form-group row">
+					  <div class="col-sm-4 mb-3 mb-sm-0">
+					   <label class="titleBold">Country</label>
+						  <input type="text" class="form-control" id="inputempCity" aria-describedby="newPasswordHelp" placeholder="City..." formControlName="empCity" [ngClass]="{ 'is-invalid': showErrors && !patientRegisterForm.controls.empCity.valid }">
+						   <div *ngIf="showErrors && !patientRegisterForm.controls.empCity.valid" class="invalid-feedback"> 
+							{{ attributes.empCity }}
+						   </div>
+					  </div>
+																				  
+					  <div class="col-sm-4">
+						   <label class="titleBold">State</label>
+						  <input type="text" class="form-control" id="inputempState" aria-describedby="newPasswordHelp" placeholder="State..." formControlName="empState" [ngClass]="{ 'is-invalid': showErrors && !patientRegisterForm.controls.empState.valid }">
+						   <div *ngIf="showErrors && !patientRegisterForm.controls.empState.valid" class="invalid-feedback"> 
+							{{ attributes.empState }}
+						 </div>				
+					  </div>
+					  <div class="col-sm-4">
+						<label class="titleBold">City</label>
+						<input type="text" class="form-control" id="inputempCity" aria-describedby="newPasswordHelp" placeholder="City..." formControlName="empCity" [ngClass]="{ 'is-invalid': showErrors && !patientRegisterForm.controls.empCity.valid }">
+						 <div *ngIf="showErrors && !patientRegisterForm.controls.empCity.valid" class="invalid-feedback"> 
+						  {{ attributes.empCity }}
+						 </div>
+						
+					  </div>
+				  </div>
+				  <div class="form-group row">
+					<div class="col-sm-6 mb-3 mb-sm-0">
+								<label class="titleBold">Employee Street Addresse</label>
+								<input type="text"  class="form-control" id="inputempStreetAdd" aria-describedby="newPasswordHelp" formControlName="empStreetAdd" placeholder="Address..." [ngClass]="{ 'is-invalid': showErrors && !patientRegisterForm.controls.empStreetAdd.valid }" >
+								<div *ngIf="showErrors && !patientRegisterForm.controls.empStreetAdd.valid" class="invalid-feedback"> 
+								  {{ attributes.empStreetAdd }}
+								 </div>	
+					</div>
+					<div class="col-sm-3">
+					  <label class="titleBold">Zip Code</label>
+					<input type="text" class="form-control" id="inputempzipcode" aria-describedby="newPasswordHelp" placeholder="Zipcode..." formControlName="empzipcode" [ngClass]="{ 'is-invalid': showErrors && !patientRegisterForm.controls.empzipcode.valid }">
+					  <div *ngIf="showErrors && !patientRegisterForm.controls.empzipcode.valid" class="invalid-feedback"> 
+						{{ attributes.empzipcode }}
+					  </div>						
+					</div>
+					<div class="col-sm-3">
+					  <label class="titleBold">DateOfBirth</label>
+					  <input [max]="getToday()" type="date" class="form-control" placeholder="avi" id="inputDateOfBirth" aria-describedby="newPasswordHelp1" formControlName="dateOfBirth" >
+							  
+				  </div>
+				  </div>
+				  <div class="form-group row">
+					<div class="col-sm-4 mb-3 mb-sm-0">
+					  <label class="titleBold">Select Doctor</label>
+								<select formControlName="doctorId" class="form-control" [ngClass]="{ 'is-invalid': showErrors && !patientRegisterForm.controls.doctorId.valid }">
+								  <option value="">Select Doctor...</option>
+								  <option *ngFor="let doctor of doctors" [value]="doctor.id">{{doctor.first_name}} {{doctor.last_name}}</option>
+								</select>
+								<div *ngIf="showErrors && !patientRegisterForm.controls.doctorId.valid" class="invalid-feedback"> 
+								  {{ attributes.doctorId }}
+								</div>						
+					</div>
+					<div class="col-sm-4">
+					  <label class="titleBold">Select Medpro</label>
+					  <select formControlName="medproId" class="form-control" [ngClass]="{ 'is-invalid': showErrors && !patientRegisterForm.controls.medproId.valid }">
+						<option value="">Select Medpro...</option>
+						<option *ngFor="let medpro of medpros" [value]="medpro.id">{{medpro.first_name}} {{medpro.last_name}}</option>
+					  </select>
+					  <div *ngIf="showErrors && !patientRegisterForm.controls.medproId.valid" class="invalid-feedback"> 
+						{{ attributes.medproId }}
+					  </div>				
+					</div>
+					
+				  </div>
+				  
+				  <div style="text-align: center;margin-top: 2%; margin-bottom: 2%;font-weight: bold; font-size: 21px;">Employer Information</div>
+										 
+				  <div class="form-group row">
+					<div class="col-sm-6 mb-3 mb-sm-0">
+								<label class="titleBold"> Employer Name </label>
+								<input type="text"  class="form-control" id="inputemployerName" aria-describedby="newPasswordHelp" formControlName="employerName" placeholder="Name..." [ngClass]="{ 'is-invalid': showErrors && !patientRegisterForm.controls.employerName.valid }" >
+								<div *ngIf="showErrors && !patientRegisterForm.controls.employerName.valid" class="invalid-feedback"> 
+								{{ attributes.employerName }}
+								 </div>	
+							  
+							   
+					</div>
+					<div class="col-sm-3">
+								<label class="titleBold">Employer State </label>
+								<input type="text"  class="form-control" id="inputemployerState" aria-describedby="newPasswordHelp" formControlName="employerState" placeholder="State..." [ngClass]="{ 'is-invalid': showErrors && !patientRegisterForm.controls.employerState.valid }" >
+								<div *ngIf="showErrors && !patientRegisterForm.controls.employerState.valid" class="invalid-feedback"> 
+								{{ attributes.employerState }}
+								 </div>	
+					</div>
+					<div class="col-sm-3">
+					<label class="titleBold">Employer City </label>
+					<input type="text"  class="form-control" id="inputemployerCity" aria-describedby="newPasswordHelp" formControlName="employerCity" placeholder="City..." [ngClass]="{ 'is-invalid': showErrors && !patientRegisterForm.controls.employerCity.valid }" >
+					<div *ngIf="showErrors && !patientRegisterForm.controls.employerCity.valid" class="invalid-feedback"> 
+					  {{ attributes.employerCity }}
+					 </div>	
+				  </div>
+				  </div>
+				  <div class="form-group row">
+				  <div class="col-sm-8 mb-3 mb-sm-0">
+							  <label class="titleBold">Employer Street Address </label>
+							  <input type="text"  class="form-control" id="inputemployerStreetadd" aria-describedby="newPasswordHelp" formControlName="employerStreetadd" placeholder="Address..." [ngClass]="{ 'is-invalid': showErrors && !patientRegisterForm.controls.employerStreetadd.valid }" >
+							  <div *ngIf="showErrors && !patientRegisterForm.controls.employerStreetadd.valid" class="invalid-feedback"> 
+								{{ attributes.employerStreetadd }}
+							   </div>	
+				  </div>
+				  <div class="col-sm-4">
+							  <label class="titleBold">Zip Code </label>
+							  <input type="text"  class="form-control" id="inputemployerZipcode" aria-describedby="newPasswordHelp" formControlName="employerZipcode" placeholder="Address..." [ngClass]="{ 'is-invalid': showErrors && !patientRegisterForm.controls.employerZipcode.valid }" >
+							  <div *ngIf="showErrors && !patientRegisterForm.controls.employerZipcode.valid" class="invalid-feedback"> 
+								{{ attributes.employerZipcode }}
+							   </div>	
+				  </div>
+				  
+				  </div>
+				  <div style="text-align: center;margin-top: 2%; margin-bottom: 2%;font-weight: bold; font-size: 21px;">Claims Administrator Information <span style="font-size: 19px;">( Completion of this section is required)</span></div>
+				  <div class="form-group row">
+				  <div class="col-sm-4 mb-3 mb-sm-0">
+							  <label class="titleBold"> Name </label>
+							  <input type="text"  class="form-control" id="inputadminName" aria-describedby="newPasswordHelp" formControlName="adminName" placeholder="Name..." [ngClass]="{ 'is-invalid': showErrors && !patientRegisterForm.controls.adminName.valid }" >
+							  <div *ngIf="showErrors && !patientRegisterForm.controls.adminName.valid" class="invalid-feedback"> 
+								{{ attributes.adminName }}
+							   </div>	
+				  </div>
+				  <div class="col-sm-4">
+							  <label class="titleBold">Company </label>
+							  <input type="text"  class="form-control" id="inputadminCompany" aria-describedby="newPasswordHelp" formControlName="adminCompany" placeholder="Company..." [ngClass]="{ 'is-invalid': showErrors && !patientRegisterForm.controls.adminCompany.valid }" >
+							  <div *ngIf="showErrors && !patientRegisterForm.controls.adminCompany.valid" class="invalid-feedback"> 
+							  {{ attributes.adminCompany }}
+							  </div>	
+				  </div>
+				  <div class="col-sm-4">
+					<label class="titleBold">Phone Number </label>
+					<input type="text"  class="form-control" id="inputadminPhoneNo" aria-describedby="newPasswordHelp" formControlName="adminPhoneNo" placeholder="Phone No..." [ngClass]="{ 'is-invalid': showErrors && !patientRegisterForm.controls.adminPhoneNo.valid }" >
+					<div *ngIf="showErrors && !patientRegisterForm.controls.adminPhoneNo.valid" class="invalid-feedback"> 
+					{{ attributes.adminPhoneNo }}
+					 </div>	
+				  </div>
+				  </div>
+				  <div class="form-group row">
+				  <div class="col-sm-8 mb-3 mb-sm-0">
+							  <label class="titleBold"> Address </label>
+							  <input type="text"  class="form-control" id="inputadminStreetAdd" aria-describedby="newPasswordHelp" formControlName="adminStreetAdd" placeholder="Address..." [ngClass]="{ 'is-invalid': showErrors && !patientRegisterForm.controls.adminStreetAdd.valid }" >
+							  <div *ngIf="showErrors && !patientRegisterForm.controls.adminStreetAdd.valid" class="invalid-feedback"> 
+							  {{ attributes.adminStreetAdd }}
+							   </div>	
+				  </div>
+				  <div class="col-sm-4">
+							  <label class="titleBold">State </label>
+							  <input type="text"  class="form-control" id="inputadminState" aria-describedby="newPasswordHelp" formControlName="adminState" placeholder="State..." [ngClass]="{ 'is-invalid': showErrors && !patientRegisterForm.controls.adminState.valid }" >
+							  <div *ngIf="showErrors && !patientRegisterForm.controls.adminState.valid" class="invalid-feedback"> 
+							  {{ attributes.adminState }}
+							   </div>	
+				  </div>
+				  
+				  </div>
+				  <div class="form-group row">
+					<div class="col-sm-4 mb-3 mb-sm-0">
+							  <label class="titleBold">City </label>
+							  <input type="text"  class="form-control" id="inputadminCity" aria-describedby="newPasswordHelp" formControlName="adminCity" placeholder="City..." [ngClass]="{ 'is-invalid': showErrors && !patientRegisterForm.controls.adminCity.valid }" >
+							  <div *ngIf="showErrors && !patientRegisterForm.controls.adminCity.valid" class="invalid-feedback"> 
+							  {{ attributes.adminCity }}
+							   </div>	
+					</div>
+					<div class="col-sm-4">
+							  <label class="titleBold">Zipcode </label>
+							  <input type="text"  class="form-control" id="inputadminZipcode" aria-describedby="newPasswordHelp" formControlName="adminZipcode" placeholder="Zipcode..." [ngClass]="{ 'is-invalid': showErrors && !patientRegisterForm.controls.adminZipcode.valid }" >
+							  <div *ngIf="showErrors && !patientRegisterForm.controls.adminZipcode.valid" class="invalid-feedback"> 
+							  {{ attributes.adminZipcode }}
+							   </div>	
+					</div>
+					
+					</div>
+				   
+					<div style="text-align: center;margin-top: 2%; margin-bottom: 2%;font-weight: bold; font-size: 21px;">Appointment Information <span style="font-size: 19px;">( Completion of this section is required)</span></div>
+					<div class="form-group row">
+					<div class="col-sm-4 mb-3 mb-sm-0">
+							<label class="titleBold"> Date of appointment call </label>
+							<input [max]="getToday()" onfocus="(this.type='date')" type="text" class="form-control" placeholder="MM/DD/YYYY" id="inputDateOfBirth2" aria-describedby="newPasswordHelp1" formControlName="appoinDate" [ngClass]="{ 'is-invalid': showErrors && !patientRegisterForm.controls.appoinDate.valid }">
+							<div *ngIf="showErrors && !patientRegisterForm.controls.appoinDate.valid" class="invalid-feedback"> 
+							  {{ attributes.appoinDate }}
+							 </div>	
+							
+					</div>
+					<div class="col-sm-4">
+							<label class="titleBold">Date of Appointment</label>
+							<input [max]="getToday()" onfocus="(this.type='date')" type="text" class="form-control" placeholder="MM/DD/YYYY" id="inputDateOfBirth1" aria-describedby="newPasswordHelp1" formControlName="appoinCall" [ngClass]="{ 'is-invalid': showErrors && !patientRegisterForm.controls.appoinCall.valid }">
+							<div *ngIf="showErrors && !patientRegisterForm.controls.appoinCall.valid" class="invalid-feedback"> 
+							  {{ attributes.appoinCall }}
+							 </div>	
+					</div>
+					<div class="col-sm-4">
+					<label class="titleBold">Time of appointment</label>
+					<input type="text"  class="form-control" id="inputappoinTime" aria-describedby="newPasswordHelp" formControlName="appoinTime" placeholder="Time..." [ngClass]="{ 'is-invalid': showErrors && !patientRegisterForm.controls.appoinTime.valid }" >
+					<div *ngIf="showErrors && !patientRegisterForm.controls.appoinTime.valid" class="invalid-feedback"> 
+					{{ attributes.appoinTime }}
+					 </div>	
+					</div>
+					</div>
+					<div class="form-group row">
+					<div class="col-sm-4 mb-3 mb-sm-0">
+							<label class="titleBold">Examination address</label>
+							<input type="text"  class="form-control" id="inputexamiAdd" aria-describedby="newPasswordHelp" formControlName="examiAdd" placeholder="Add..." [ngClass]="{ 'is-invalid': showErrors && !patientRegisterForm.controls.examiAdd.valid }" >
+							<div *ngIf="showErrors && !patientRegisterForm.controls.examiAdd.valid" class="invalid-feedback"> 
+							{{ attributes.examiAdd }}
+							 </div>	
+						  
+					</div>
+					<div class="col-sm-4">
+							<label class="titleBold">City</label>
+							<input type="text"  class="form-control" id="inputexamiCity" aria-describedby="newPasswordHelp" formControlName="examiCity" placeholder="City..." [ngClass]="{ 'is-invalid': showErrors && !patientRegisterForm.controls.examiCity.valid }" >
+						  <div *ngIf="showErrors && !patientRegisterForm.controls.examiCity.valid" class="invalid-feedback"> 
+						  {{ attributes.examiCity }}
+						  </div>	
+													
+					</div>
+					<div class="col-sm-4">
+					<label class="titleBold">Zipcode</label>
+					<input type="text"  class="form-control" id="inputexamiZipdode" aria-describedby="newPasswordHelp" formControlName="examiZipdode" placeholder="zipcode..." [ngClass]="{ 'is-invalid': showErrors && !patientRegisterForm.controls.examiZipdode.valid }" >
+					<div *ngIf="showErrors && !patientRegisterForm.controls.examiZipdode.valid" class="invalid-feedback"> 
+					{{ attributes.examiZipdode }}
+					</div>	              
+					</div>
+					
+					</div>
+					<div class="form-group row">
+				  
+					<div class="col-sm-4 mb-3 mb-sm-0">
+						  <label class="titleBold">QME Name</label>
+						  <input type="text"  class="form-control" id="inputqmeName" aria-describedby="newPasswordHelp" formControlName="qmeName" placeholder="name..." [ngClass]="{ 'is-invalid': showErrors && !patientRegisterForm.controls.qmeName.valid }" >
+						  <div *ngIf="showErrors && !patientRegisterForm.controls.qmeName.valid" class="invalid-feedback"> 
+							{{ attributes.qmeName }}
+							</div>
+					</div>
+					<div class="col-sm-4">
+						  <label class="titleBold">City</label>
+						  <input type="text"  class="form-control" id="inputqmeCity" aria-describedby="newPasswordHelp" formControlName="qmeCity" placeholder="City..." [ngClass]="{ 'is-invalid': showErrors && !patientRegisterForm.controls.qmeCity.valid }" >
+						  <div *ngIf="showErrors && !patientRegisterForm.controls.qmeCity.valid" class="invalid-feedback"> 
+							{{ attributes.qmeCity }}
+							</div>
+					</div>
+					<div class="col-sm-4">
+					<label class="titleBold">state</label>
+					<input type="text"  class="form-control" id="inputqmeState" aria-describedby="newPasswordHelp" formControlName="qmeState" placeholder="state..." [ngClass]="{ 'is-invalid': showErrors && !patientRegisterForm.controls.qmeState.valid }" >
+					<div *ngIf="showErrors && !patientRegisterForm.controls.qmeState.valid" class="invalid-feedback"> 
+					  {{ attributes.qmeState }}
+					  </div>
+					</div>
+					
+					</div>
+					<div class="form-group row">
+					
+					<div class="col-sm-4 mb-3 mb-sm-0">
+						  <label class="titleBold">Street address or P.O. Box</label>
+						  <input type="text"  class="form-control" id="inputqmeAdd" aria-describedby="newPasswordHelp" formControlName="qmeAdd" placeholder="add..." [ngClass]="{ 'is-invalid': showErrors && !patientRegisterForm.controls.qmeAdd.valid }" >
+						  <div *ngIf="showErrors && !patientRegisterForm.controls.qmeAdd.valid" class="invalid-feedback"> 
+							{{ attributes.qmeAdd }}
+							</div>
+					</div>
+					<div class="col-sm-4">
+						  <label class="titleBold">Zipcode</label>
+						  <input type="text"  class="form-control" id="inputqmeZipcode" aria-describedby="newPasswordHelp" formControlName="qmeZipcode" placeholder="zipcode..." [ngClass]="{ 'is-invalid': showErrors && !patientRegisterForm.controls.qmeZipcode.valid }" >
+						  <div *ngIf="showErrors && !patientRegisterForm.controls.qmeZipcode.valid" class="invalid-feedback"> 
+							{{ attributes.qmeZipcode }}
+							</div>	
+					</div>
+					<div class="col-sm-4">
+					<label class="titleBold">Date Signed</label>
+					<input [max]="getToday()" onfocus="(this.type='date')" type="text" class="form-control" placeholder="MM/DD/YYYY" id="inputDateOfBirth" aria-describedby="newPasswordHelp1"  formControlName="dateSigned"[ngClass]="{ 'is-invalid': showErrors && !patientRegisterForm.controls.dateSigned.valid }" >
+					<div *ngIf="showErrors && !patientRegisterForm.controls.dateSigned.valid" class="invalid-feedback"> 
+					  {{ attributes.dateSigned }}
+					  </div>
+					</div>
+					
+					</div>
+					<div class="form-group row">
+				  
+					  <div class="col-sm-4 mb-3 mb-sm-0">
+							<label class="titleBold">Defendant Attorney</label>
+							<input type="text"  class="form-control" id="inputservice1" aria-describedby="newPasswordHelp" formControlName="service1" placeholder="method of service..." [ngClass]="{ 'is-invalid': showErrors && !patientRegisterForm.controls.service1.valid }" >
+							<div *ngIf="showErrors && !patientRegisterForm.controls.service1.valid" class="invalid-feedback"> 
+							  {{ attributes.service1 }}
+							  </div>
+					  </div>
+					  <div class="col-sm-4">
+							<label class="titleBold">Person or firm served</label>
+							<input type="text"  class="form-control" id="inputservice1Person" aria-describedby="newPasswordHelp" formControlName="service1Person" placeholder="Firm served..." [ngClass]="{ 'is-invalid': showErrors && !patientRegisterForm.controls.service1Person.valid }" >
+						<div *ngIf="showErrors && !patientRegisterForm.controls.service1Person.valid" class="invalid-feedback"> 
+						{{ attributes.service1Person }}
+						</div>
+					  </div>
+					  <div class="col-sm-4">
+					  <label class="titleBold">Street address or P.O. Box</label>
+					  <input type="text"  class="form-control" id="inputservice1Add" aria-describedby="newPasswordHelp" formControlName="service1Add" placeholder="Add..." [ngClass]="{ 'is-invalid': showErrors && !patientRegisterForm.controls.service1Add.valid }" >
+					  <div *ngIf="showErrors && !patientRegisterForm.controls.service1Add.valid" class="invalid-feedback"> 
+						{{ attributes.service1Add }}
+						</div>
+					  
+					  </div>
+					  </div>
+					  <div class="form-group row">
+					  
+					  <div class="col-sm-4 mb-3 mb-sm-0">
+							<label class="titleBold">City</label>
+							<input type="text"  class="form-control" id="inputservice1City" aria-describedby="newPasswordHelp" formControlName="service1City" placeholder="City..." [ngClass]="{ 'is-invalid': showErrors && !patientRegisterForm.controls.service1City.valid }" >
+							<div *ngIf="showErrors && !patientRegisterForm.controls.service1City.valid" class="invalid-feedback"> 
+							  {{ attributes.service1City }}
+							  </div>
+					  </div>
+					  <div class="col-sm-4">
+							<label class="titleBold">State</label>
+							<input type="text"  class="form-control" id="inputservice1State" aria-describedby="newPasswordHelp" formControlName="service1State" placeholder="state..." [ngClass]="{ 'is-invalid': showErrors && !patientRegisterForm.controls.service1State.valid }" >
+							<div *ngIf="showErrors && !patientRegisterForm.controls.service1State.valid" class="invalid-feedback"> 
+							  {{ attributes.service1State }}
+							  </div>
+					  </div>
+					  <div class="col-sm-4">
+					  <label class="titleBold">Zipcode</label>
+						  
+					  <input type="text"  class="form-control" id="inputservice1Zipcode" aria-describedby="newPasswordHelp" formControlName="service1Zipcode" placeholder="zipcode..." [ngClass]="{ 'is-invalid': showErrors && !patientRegisterForm.controls.service1Zipcode.valid }" >
+					  <div *ngIf="showErrors && !patientRegisterForm.controls.service1Zipcode.valid" class="invalid-feedback"> 
+						{{ attributes.service1Zipcode }}
+						</div>
+					  </div>
+					  
+					  </div>
+					  <div class="form-group row">
+				  
+						<div class="col-sm-4 mb-3 mb-sm-0">
+							  <label class="titleBold">Applicant Attorney</label>
+							  <input type="text"  class="form-control" id="inputservice2" aria-describedby="newPasswordHelp" formControlName="service2" placeholder="City..." [ngClass]="{ 'is-invalid': showErrors && !patientRegisterForm.controls.service2.valid }" >
+							  <div *ngIf="showErrors && !patientRegisterForm.controls.service2.valid" class="invalid-feedback"> 
+							  {{ attributes.service2 }}
+							  </div>
+						</div>
+						<div class="col-sm-4">
+							  <label class="titleBold">Person or firm served</label>
+							  <input type="text"  class="form-control" id="inputservice2Person" aria-describedby="newPasswordHelp" formControlName="service2Person" placeholder="firm served..." [ngClass]="{ 'is-invalid': showErrors && !patientRegisterForm.controls.service2Person.valid }" >
+						<div *ngIf="showErrors && !patientRegisterForm.controls.service2Person.valid" class="invalid-feedback"> 
+						  {{ attributes.service2Person }}
+						  </div>
+						</div>
+						<div class="col-sm-4">
+						<label class="titleBold">Street address or P.O. Box</label>
+						<input type="text"  class="form-control" id="inputservice2Add" aria-describedby="newPasswordHelp" formControlName="service2Add" placeholder="Street address..." [ngClass]="{ 'is-invalid': showErrors && !patientRegisterForm.controls.service2Add.valid }" >
+						<div *ngIf="showErrors && !patientRegisterForm.controls.service2Add.valid" class="invalid-feedback"> 
+						{{ attributes.service2Add }}
+						</div>
+						
+						</div>
+						</div>
+						<div class="form-group row">
+						
+						<div class="col-sm-4 mb-3 mb-sm-0">
+							  <label class="titleBold">City</label>
+							  <input type="text"  class="form-control" id="inputservice2City" aria-describedby="newPasswordHelp" formControlName="service2City" placeholder="City..." [ngClass]="{ 'is-invalid': showErrors && !patientRegisterForm.controls.service2City.valid }" >
+							  <div *ngIf="showErrors && !patientRegisterForm.controls.service2City.valid" class="invalid-feedback"> 
+							  {{ attributes.service2City }}
+							  </div>
+						</div>
+						<div class="col-sm-4">
+							  <label class="titleBold">State</label>
+							  <input type="text"  class="form-control" id="inputservice2State" aria-describedby="newPasswordHelp" formControlName="service2State" placeholder="state..." [ngClass]="{ 'is-invalid': showErrors && !patientRegisterForm.controls.service2State.valid }" >
+							  <div *ngIf="showErrors && !patientRegisterForm.controls.service2State.valid" class="invalid-feedback"> 
+							  {{ attributes.service2State }}
+							  </div>
+						</div>
+						<div class="col-sm-4">
+						<label class="titleBold">Zipcode</label>
+							
+						<input type="text"  class="form-control" id="input service2Zipcode" aria-describedby="newPasswordHelp" formControlName="service2Zipcode" placeholder="zipcode..." [ngClass]="{ 'is-invalid': showErrors && !patientRegisterForm.controls.service2Zipcode.valid }" >
+						<div *ngIf="showErrors && !patientRegisterForm.controls.service2Zipcode.valid" class="invalid-feedback"> 
+						{{ attributes.service2Zipcode }}
+						</div>
+						</div>
+						
+						</div>
+				  
+					  <div class="form-group row">
+				  
+						<div class="col-sm-4 mb-3 mb-sm-0">
+							  <label class="titleBold">Method of Service</label>
+							  <input type="text"  class="form-control" id="inputservice3" aria-describedby="newPasswordHelp" formControlName="service3" placeholder="method of service..." [ngClass]="{ 'is-invalid': showErrors && !patientRegisterForm.controls.service3.valid }" >
+							  <div *ngIf="showErrors && !patientRegisterForm.controls.service3.valid" class="invalid-feedback"> 
+							  {{ attributes.service3 }}
+							  </div>
+						</div>
+						<div class="col-sm-4">
+							  <label class="titleBold">Person or firm served</label>
+							  <input type="text"  class="form-control" id="inputservice3Person" aria-describedby="newPasswordHelp" formControlName="service3Person" placeholder="firm served..." [ngClass]="{ 'is-invalid': showErrors && !patientRegisterForm.controls.service3Person.valid }" >
+						<div *ngIf="showErrors && !patientRegisterForm.controls.service3Person.valid" class="invalid-feedback"> 
+						  {{ attributes.service3Person }}
+						  </div>
+						</div>
+						<div class="col-sm-4">
+						<label class="titleBold">Street address or P.O. Box</label>
+						<input type="text"  class="form-control" id="inputservice3Add" aria-describedby="newPasswordHelp" formControlName="service3Add" placeholder="Address..." [ngClass]="{ 'is-invalid': showErrors && !patientRegisterForm.controls.service3Add.valid }" >
+						<div *ngIf="showErrors && !patientRegisterForm.controls.service3Add.valid" class="invalid-feedback"> 
+						{{ attributes.service3Add }}
+						</div>
+						
+						</div>
+						</div>
+						<div class="form-group row">
+						
+						<div class="col-sm-4 mb-3 mb-sm-0">
+							  <label class="titleBold">City</label>
+							  <input type="text"  class="form-control" id="inputservice3City" aria-describedby="newPasswordHelp" formControlName="service3City" placeholder="City..." [ngClass]="{ 'is-invalid': showErrors && !patientRegisterForm.controls.service3City.valid }" >
+							  <div *ngIf="showErrors && !patientRegisterForm.controls.service3City.valid" class="invalid-feedback"> 
+							  {{ attributes.service3City }}
+							  </div>
+						</div>
+						<div class="col-sm-4">
+							  <label class="titleBold">State</label>
+							  <input type="text"  class="form-control" id="input service3State" aria-describedby="newPasswordHelp" formControlName="service3State" placeholder="State..." [ngClass]="{ 'is-invalid': showErrors && !patientRegisterForm.controls.service3State.valid }" >
+							  <div *ngIf="showErrors && !patientRegisterForm.controls.service3State.valid" class="invalid-feedback"> 
+							  {{ attributes.service3State }}
+							  </div>
+						</div>
+						<div class="col-sm-4">
+						<label class="titleBold">Zipcode</label>
+							
+						<input type="text"  class="form-control" id="inputservice3Zipcode" aria-describedby="newPasswordHelp" formControlName="service3Zipcode" placeholder="Zipcode..." [ngClass]="{ 'is-invalid': showErrors && !patientRegisterForm.controls.service3Zipcode.valid }" >
+						<div *ngIf="showErrors && !patientRegisterForm.controls.service3Zipcode.valid" class="invalid-feedback"> 
+						{{ attributes.service3Zipcode }}
+						</div>
+						</div>
+						
+						</div>
+						<div class="form-group row">
+				  
+						<div class="col-sm-4 mb-3 mb-sm-0">
+							  <label class="titleBold">Method of Service</label>
+							  <input type="text"  class="form-control" id="inputservice4" aria-describedby="newPasswordHelp" formControlName="service4" placeholder="Method of service..." [ngClass]="{ 'is-invalid': showErrors && !patientRegisterForm.controls.service4.valid }" >
+							  <div *ngIf="showErrors && !patientRegisterForm.controls.service4.valid" class="invalid-feedback"> 
+								{{ attributes.service4 }}
+								</div>
+						</div>
+						<div class="col-sm-4">
+							  <label class="titleBold">Person or firm served</label>
+							  <input type="text"  class="form-control" id="inputservice4Person" aria-describedby="newPasswordHelp" formControlName="service4Person" placeholder="firm served..." [ngClass]="{ 'is-invalid': showErrors && !patientRegisterForm.controls.service4Person.valid }" >
+						  <div *ngIf="showErrors && !patientRegisterForm.controls.service4Person.valid" class="invalid-feedback"> 
+						  {{ attributes.service4Person }}
+						  </div>
+						</div>
+						<div class="col-sm-4">
+						<label class="titleBold">Street address or P.O. Box</label>
+						<input type="text"  class="form-control" id="inputservice4Add" aria-describedby="newPasswordHelp" formControlName="service4Add" placeholder="Address..." [ngClass]="{ 'is-invalid': showErrors && !patientRegisterForm.controls.service4Add.valid }" >
+						<div *ngIf="showErrors && !patientRegisterForm.controls.service4Add.valid" class="invalid-feedback"> 
+						  {{ attributes.service4Add }}
+						  </div>
+						
+						</div>
+						</div>
+						<div class="form-group row">
+						
+						<div class="col-sm-4 mb-3 mb-sm-0">
+							  <label class="titleBold">City</label>
+							  <input type="text"  class="form-control" id="inputservice4City" aria-describedby="newPasswordHelp" formControlName="service4City" placeholder="City..." [ngClass]="{ 'is-invalid': showErrors && !patientRegisterForm.controls.service4City.valid }" >
+							  <div *ngIf="showErrors && !patientRegisterForm.controls.service4City.valid" class="invalid-feedback"> 
+								{{ attributes.service4City }}
+								</div>
+						</div>
+						<div class="col-sm-4">
+							  <label class="titleBold">State</label>
+							  <input type="text"  class="form-control" id="inputservice4State" aria-describedby="newPasswordHelp" formControlName="service4State" placeholder="state..." [ngClass]="{ 'is-invalid': showErrors && !patientRegisterForm.controls.service4State.valid }" >
+							  <div *ngIf="showErrors && !patientRegisterForm.controls.service4State.valid" class="invalid-feedback"> 
+								{{ attributes.service4State }}
+								</div>
+						</div>
+						<div class="col-sm-4">
+						<label class="titleBold">Zipcode</label>
+							
+						<input type="text"  class="form-control" id="inputservice4Zipcode" aria-describedby="newPasswordHelp" formControlName="service4Zipcode" placeholder="zipcode..." [ngClass]="{ 'is-invalid': showErrors && !patientRegisterForm.controls.service4Zipcode.valid }" >
+						<div *ngIf="showErrors && !patientRegisterForm.controls.service4Zipcode.valid" class="invalid-feedback"> 
+						  {{ attributes.service4Zipcode }}
+						  </div>
+						</div>
+					  
+						</div>
+				  </div>	
+					  
+					  
+						
+						<button type="submit" class="btn btn-primary btn-block">
+							<span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+							Register Patient and Claim
+						</button>
+						<hr>                
+					  </form> 
+					</div>
+				  </div>
+				  </div>
+				  </div>
+				  </div>
+				  </div>
+				  </div>

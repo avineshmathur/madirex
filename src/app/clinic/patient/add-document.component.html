@@ -1,0 +1,97 @@
+<div class="container-fluid">
+  <!-- Page Heading -->
+  <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Add Document and Transcript</h1>
+    <button class="btn btn-primary" (click)="backClicked();">BACK</button>
+  </div>
+	<!--<tr *ngFor="let doctor of doctors">
+      <th>{{doctor.first_name}}</th>
+	</tr>-->
+  <!-- Content Row -->
+  <div class="row">
+	<div class="col-xl-12 col-md-12 mb-4">
+      <div class="card shadow h-100 py-2">
+        <div class="card-body">
+          <div class="row no-gutters align-items-center">
+            <div class="col ">
+			<form class="" [formGroup]="documentRegisterForm" (ngSubmit)="submit()" novalidate>
+                <div class="form-group row">
+                    <div class="col-sm-6 mb-3 mb-sm-0">
+											<label class="titleBold">Document Note<span class="mandatorySign">*</span></label>
+                        <input type="text" class="form-control" id="inputDocumentNote" aria-describedby="newPasswordHelp" placeholder="Document Note..." formControlName="documentNote" [ngClass]="{ 'is-invalid': showErrors && !documentRegisterForm.controls.documentNote.valid }">
+                            <div *ngIf="showErrors && !documentRegisterForm.controls.documentNote.valid" class="invalid-feedback"> 
+                                {{ attributes.documentNote }}
+                            </div>
+                    </div>
+																				
+                    <div class="col-sm-6">
+											<label class="titleBold">ROR/Transcript Expected date<span class="mandatorySign">*</span></label>
+                        <input min="{{myDate}}" onfocus="(this.type='date')" type="text" placeholder="MM/DD/YYYY" class="form-control" id="inputExpectedDate" aria-describedby="newPasswordHelp" formControlName="expectedDate" [ngClass]="{ 'is-invalid': showErrors && !documentRegisterForm.controls.expectedDate.valid }">
+                        <div *ngIf="showErrors && !documentRegisterForm.controls.expectedDate.valid" class="invalid-feedback"> 
+                            {{ attributes.expectedDate }}
+                        </div>				
+                    </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-12">
+                    <label class="titleBold">File Choose:</label>
+                    <div class="form-group row" style="margin-left: 2px;">
+                      <div >
+                        <input id="folder" type="radio" (change)="radioChangeEvent($event)" value="folder" name="filetype" checked >
+                        <label for="folder">Folder</label>
+                     </div>
+            
+                     <div style="margin-left: 50px;">
+                        <input id="file" type="radio" value="file" (change)="radioChangeEvent($event)" name="filetype" >
+                        <label for="file">File</label>
+                     </div>
+                    </div>
+                    
+                  </div>
+                                      
+                  
+              </div>
+              
+							
+                <div *ngIf="chooseFileType == 'folder'" class="form-group row">					
+                    <div class="col-sm-6 mb-3 mb-sm-0">
+                        <input type="file" (change)="fileChangeEvent($event)" formControlName="docFile" webkitDirectory
+                             [ngClass]="{ 'is-invalid': showErrors && !documentRegisterForm.controls.docFile.valid }" />
+                            <small *ngIf="fileSizeValidation" class="text-danger">
+                                {{ fileSizeValidation }}
+                            </small>
+														<div *ngIf="showErrors && !documentRegisterForm.controls.docFile.valid" class="invalid-feedback"> 
+                            {{ attributes.docFile }}
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="chooseFileType == 'file'" class="form-group row">					
+                  <div class="col-sm-6 mb-3 mb-sm-0">
+                      <input type="file" (change)="fileChangeEvent($event)" formControlName="docFile" 
+                           [ngClass]="{ 'is-invalid': showErrors && !documentRegisterForm.controls.docFile.valid }" />
+                          <small *ngIf="fileSizeValidation" class="text-danger">
+                              {{ fileSizeValidation }}
+                          </small>
+                          <div *ngIf="showErrors && !documentRegisterForm.controls.docFile.valid" class="invalid-feedback"> 
+                          {{ attributes.docFile }}
+                      </div>
+                  </div>
+              </div>
+								
+								
+								<input type="hidden" class="form-control" id="inputclaimId" formControlName="claimId">
+								<input type="hidden" class="form-control" id="inputuserId" formControlName="userId">
+
+								<button [disabled]="disabled" type="submit" class="btn btn-primary btn-block">
+										<span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+												Add Document
+								</button>
+                <hr>                
+              </form> 
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

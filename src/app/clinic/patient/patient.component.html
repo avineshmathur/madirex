@@ -1,0 +1,174 @@
+
+<!-- Begin Page Content -->
+        <div class="container-fluid">
+          <!-- Page Heading -->
+          <h1 class="h3 mb-2 text-gray-800">Patient and Claim Registers</h1>
+          <!--<p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p>-->
+
+          <!-- DataTales Example -->
+          <div class="card shadow mb-4">
+            <div *ngIf="loggedInClinicDetails.role_id == '1'" class="card-header py-3">
+              <p style="float: left;">
+              <a routerLink="/clinic/patient-archived" class="btn btn-warning btn-icon-split">
+                <span class="icon text-white-50">
+                  <i class="fas fa-user"></i>
+                </span>
+                <span class="text">Archived Claim</span>
+              </a>
+              </p>
+              <p style="float: right;">
+              <a routerLink="/clinic/patient-register" class="btn btn-success btn-icon-split">
+                <span class="icon text-white-50">
+                  <i class="fas fa-plus"></i>
+                </span>
+                <span class="text">Add New Claim</span>
+              </a>
+              </p>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-bordered" width="100%" dt-column-defs="dtColumnDefs"  cellspacing="0" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+                  
+                 
+                  <thead>
+                    <tr>
+                      <th>WCAB</th>
+                      <th>Claim No</th>
+                      <th>Patient Name</th>
+                      <th>Documents</th>
+                      <th>Claim Status &nbsp;</th>
+                      <!--<th>Transcripts Status</th>
+                      <a> <i (click)="open(mymodal,'a')" class="fa fa-info-circle"></i> </a>-->
+                      <th *ngIf="loggedInClinicDetails.role_id == '1'">Action</th>
+                    </tr>
+                  </thead>
+                  <!--<tfoot>
+                    <tr>
+                      <th>Name</th>
+                      <th>Position</th>
+                      <th>Office</th>
+                      <th>Age</th>
+                      <th>Start date</th>
+                      <th>Salary</th>
+                    </tr>
+                  </tfoot>-->
+                  <tbody>
+                    
+                    <!--<tr>
+                      <td><a class="nav-link" routerLink="/clinic/claim-detail">          
+                        XYZ123</a></td>
+                      <td>CASE9990</td>
+                      <td>Richard Harry</td>
+                      <td><a class="btn btn-info btn-sm" routerLink="/clinic/document-list">
+                            <i class="fas fa-file"></i>
+                          </a>&nbsp; No Document</td>
+                      <td>Reviewed By Medpro</td>
+                      
+                      <td>
+                        <a class="btn btn-info btn-circle btn-sm">
+                          <i class="fas fa-edit"></i>
+                        </a>&nbsp;
+                        
+                        <a class="btn btn-danger btn-circle btn-sm">
+                          <i class="fas fa-trash"></i>
+                        </a>
+                      </td>
+                    </tr>-->
+                   
+                    <tr *ngFor="let claim of claims;let rowIndex = index">                       
+                      <td>{{claim.case_no}}</td>
+                      <td><a class="nav-link1" routerLink="/clinic/claim-detail/{{claim.id}}">          
+                        {{claim.claim_no}}</a>
+                      <span style="float:right">
+                        <a routerLink="/clinic/multiclaim/{{claim.id}}" class="btn btn-info btn-circle btn-sm" title="Add Claim">
+                          <i class="fas fa-user-plus"></i>
+                        </a>
+                      </span>
+                      </td>
+                      <td>{{claim.first_name}} {{claim.last_name}}</td>
+                      <td *ngIf="claim.status != 'inactive'"><a class="btn btn-info btn-sm" routerLink="/clinic/document-list/{{claim.id}}" title="Document List">
+                            <i class="fas fa-file"></i>
+                          </a> Document Uploaded<!--&nbsp; No Document--></td>
+                      <td *ngIf="claim.status == 'inactive'"><a class="btn btn-info btn-sm" routerLink="/clinic/document-list/{{claim.id}}" title="No Document">
+                            <i class="fas fa-file"></i>
+                          </a> No Documents<!--&nbsp; No Document-->
+                       
+                        </td>
+                      <td [ngStyle]="{'color': (claim.status === 'completed') ? 'green' : (claim.status === 'inactive') ? 'red' : (claim.status === 'sent_to_medpro'|| claim.status === 'uploaded' || claim.status === 'reviewed_by_medpro' || claim.status === 'medpro_sent_to_clinic'|| claim.status === 'reviewed_by_doctor' || claim.status === 'sent_to_doctor' || claim.status === 'doctor_sent_to_medpro' ) ? '#36b9cc' : ''}">{{claim.status}}
+                        <span style="float:right">
+                          <a (click)="openStatus(mystatusmodal,claim.id)"  class="btn btn-warning btn-circle btn-sm" title="Update Claim Status">
+                            <i class="fas fa-toggle-off"> </i>
+                          </a>
+                        </span>
+                      </td>
+                      <td *ngIf="loggedInClinicDetails.role_id == '1'">
+                        <a routerLink="/clinic/patient-update/{{claim.id}}" class="btn btn-info btn-circle btn-sm" title="Update Claim">
+                          <i class="fas fa-edit"></i>
+                        </a>&nbsp;
+                        
+                        <a routerLink="/clinic/send-message/{{claim.id}}/claim" class="btn btn-info btn-circle btn-sm" title="Send Message">
+                          <i class="fas fa-envelope"></i>
+                        </a>&nbsp;
+                        
+                          <!--<a (click)="onUpdateStatus(claim.id)" class="btn btn-warning btn-circle btn-sm">
+                            <i class="fas fa-toggle-on"></i>
+                          </a>&nbsp;-->
+                       
+                        <!-- <a (click)="onDelete(claim.id,rowIndex)" class="btn btn-success btn-circle btn-sm" title="Update Claim Status">
+                          <i class="fas fa-toggle-on"></i>
+                        </a>&nbsp; -->
+                        
+                       
+                        <a routerLink="/clinic/qmr/{{claim.id}}" class="btn btn-info btn-circle btn-sm" title="QMR Form">
+                          <i class="fas fa fa-print"></i>
+                        </a>&nbsp;
+                      </td>
+                    </tr>
+                   
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <ng-template #mymodal let-modal>
+          <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">Status</h4>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body" [innerHTML]="message">
+         
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Ok</button>
+          </div>
+        </ng-template>
+        <ng-template #mystatusmodal let-modal>
+          <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title"> Update Status</h4>
+            <button type="button" class="close" id="statusModel" aria-label="Close" (click)="modal.dismiss('Cross click')">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body" >
+            <label class="titleBold">Select Status<span class="mandatorySign">*</span></label>
+            <input id="doctor" list="doctors" class="form-control" name="userstatus" #userstatus >
+            <datalist id="doctors">
+              <option *ngFor="let doctor of this.status" [value]="doctor.status"></option>
+            </datalist>
+         
+            <div *ngIf="statusErrors" class="invalid-status"> 
+             Please fill status
+            </div>
+          </div>
+          <!-- <div>
+            <button type="button" class="btn btn-outline-dark updatestatus" (click)="updateStatus()">Update Status</button>
+          </div> -->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-dark updatestatus" (click)="updateStatus(userstatus.value)">Update Status</button>
+          </div>
+        </ng-template>
+        <!-- /.container-fluid -->

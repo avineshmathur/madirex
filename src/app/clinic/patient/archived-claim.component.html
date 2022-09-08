@@ -1,0 +1,80 @@
+<!-- Begin Page Content -->
+        <div class="container-fluid">
+          <!-- Page Heading -->
+          <h1 class="h3 mb-2 text-gray-800">Archived Patient and Claim Register</h1>
+          <!--<p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p>-->
+
+          <!-- DataTales Example -->
+          <div class="card shadow mb-4">
+            
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-bordered" width="100%" cellspacing="0" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+                  <thead>
+                    <tr>
+                      <th>WCAB</th>
+                      <th>Claim No</th>
+                      <th>Patient Name</th>
+                      <th>Documents</th>
+                      <th>Claim Status</th>
+                      <th *ngIf="loggedInClinicDetails.role_id == '1'">Action</th>
+                    </tr>
+                  </thead>
+                  <!--<tfoot>
+                    <tr>
+                      <th>Name</th>
+                      <th>Position</th>
+                      <th>Office</th>
+                      <th>Age</th>
+                      <th>Start date</th>
+                      <th>Salary</th>
+                    </tr>
+                  </tfoot>-->
+                  <tbody>
+                    
+                    <!--<tr>
+                      <td><a class="nav-link" routerLink="/clinic/claim-detail">          
+                        XYZ123</a></td>
+                      <td>CASE9990</td>
+                      <td>Richard Harry</td>
+                      <td><a class="btn btn-info btn-sm" routerLink="/clinic/document-list">
+                            <i class="fas fa-file"></i>
+                          </a>&nbsp; No Document</td>
+                      <td>Reviewed By Medpro</td>
+                      
+                      <td>
+                        <a class="btn btn-info btn-circle btn-sm">
+                          <i class="fas fa-edit"></i>
+                        </a>&nbsp;
+                        
+                        <a class="btn btn-danger btn-circle btn-sm">
+                          <i class="fas fa-trash"></i>
+                        </a>
+                      </td>
+                    </tr>-->
+                   
+                    <tr *ngFor="let archived of archiveds;let rowIndex = index">
+                      <td>{{archived.case_no}}</td>
+                       <td><a class="nav-link" routerLink="/clinic/claim-detail/{{archived.id}}">          
+                        {{archived.claim_no}}</a></td>                      
+                      <td>{{archived.first_name}} {{archived.last_name}}</td>
+                      <td><a class="btn btn-info btn-sm" routerLink="/clinic/document-list/{{archived.id}}">
+                            <i class="fas fa-file"></i>
+                          </a><!--&nbsp; No Document--></td>
+                      <td>{{archived.status}}</td>
+                      <td *ngIf="loggedInClinicDetails.role_id == '1'">
+                        <a (click)="onDelete(archived.id,rowIndex)" class="btn btn-warning btn-circle btn-sm" title="Update Claim Status">
+                          <i class="fas fa-toggle-off"></i>
+                        </a>
+                      </td>
+                      
+                    </tr>
+                   
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <!-- /.container-fluid -->

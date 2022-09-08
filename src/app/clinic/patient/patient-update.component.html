@@ -1,0 +1,128 @@
+<div class="container-fluid">
+  <!-- Page Heading -->
+  <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Update Patient Detail</h1>
+    <button class="btn btn-primary" (click)="backClicked();">BACK</button>
+  </div>
+	<!--<tr *ngFor="let doctor of doctors">
+      <th>{{doctor.first_name}}</th>
+	</tr>-->
+  <!-- Content Row -->
+  <div class="row">
+	<div class="col-xl-12 col-md-12 mb-4">
+      <div class="card shadow h-100 py-2">
+        <div class="card-body">
+          <div class="row no-gutters align-items-center">
+            <div class="col ">
+								<form class="" [formGroup]="claimUpdateForm" (ngSubmit)="submit()" novalidate>
+                <div class="form-group row">
+                    <div class="col-sm-6 mb-3 mb-sm-0">
+											<label class="titleBold">First Name<span class="mandatorySign">*</span></label>
+                        <input type="text" class="form-control" id="inputFirstName" aria-describedby="newPasswordHelp" placeholder="First Name..." formControlName="firstName" [ngClass]="{ 'is-invalid': showErrors && !claimUpdateForm.controls.firstName.valid }">
+												<div *ngIf="showErrors && !claimUpdateForm.controls.firstName.valid" class="invalid-feedback"> 
+													{{ attributes.firstName }}
+												</div>
+                    </div>
+																				
+                    <div class="col-sm-6">
+											<label class="titleBold">Last Name<span class="mandatorySign">*</span></label>
+                        <input type="text" class="form-control" id="inputLastName" aria-describedby="newPasswordHelp" placeholder="Last Name..." formControlName="lastName" [ngClass]="{ 'is-invalid': showErrors && !claimUpdateForm.controls.lastName.valid }">
+												<div *ngIf="showErrors && !claimUpdateForm.controls.lastName.valid" class="invalid-feedback"> 
+													{{ attributes.lastName }}
+												</div>				
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-6 mb-3 mb-sm-0">
+											<label class="titleBold">Date of Birth</label>
+												<input  type="date" class="form-control" id="inputDateOfBirth" aria-describedby="newPasswordHelp" formControlName="dateOfBirth" >
+													
+                    </div>
+                    <div class="col-sm-6">
+											<label class="titleBold">Contact Info</label>
+												<input type="text" class="form-control" id="inputContactInfo" aria-describedby="newPasswordHelp" placeholder="Conatct Info..." formControlName="contctInfo" >
+												
+                    </div>
+                </div>
+                <div class="form-group row">
+										<div class="col-sm-6 mb-3 mb-sm-0">
+											<label class="titleBold">Claim No.<span class="mandatorySign">*</span></label>
+                        <input readonly type="text" class="form-control" id="inputClaimNo" placeholder="Claim No..." formControlName="claimNo" [ngClass]="{ 'is-invalid': showErrors && !claimUpdateForm.controls.claimNo.valid }">
+												<div *ngIf="showErrors && !claimUpdateForm.controls.claimNo.valid" class="invalid-feedback"> 
+													{{ attributes.claimNo }}
+												</div>			
+                    </div>									
+                    <div class="col-sm-6">
+											<label class="titleBold">Case No.<span class="mandatorySign">*</span></label>
+                        <input readonly type="text" class="form-control" id="inputCaseNo" placeholder="Case No..." formControlName="caseNo" [ngClass]="{ 'is-invalid': showErrors && !claimUpdateForm.controls.caseNo.valid }">
+												<div *ngIf="showErrors && !claimUpdateForm.controls.caseNo.valid" class="invalid-feedback"> 
+													{{ attributes.caseNo }}
+												</div>						
+                    </div>
+                </div>
+                
+                <div class="form-group row">
+										<div class="col-sm-6 mb-3 mb-sm-0">
+											<label class="titleBold">Applicant Attorney</label>
+                        <input type="text" class="form-control" id="inputAppAttorney" placeholder="Applicant Attorney..." formControlName="appAttorney" >
+															
+                    </div>									
+                    <div class="col-sm-6">
+											<label class="titleBold">Employer</label>
+                        <input type="text" class="form-control" id="inputEmployer" placeholder="Employer..." formControlName="employer" >
+																	
+                    </div>
+                </div>
+                
+                <div class="form-group row">
+                    <div class="col-sm-6 mb-3 mb-sm-0">
+											<label class="titleBold">Defendant Attorney<span class="mandatorySign">*</span></label>
+                        <input type="text" class="form-control" id="inputDefAttorney" placeholder="Defendant Attorney..." formControlName="defAttorney" >
+												
+                    </div>									
+                    <div class="col-sm-6">
+                        <label class="titleBold">Doctor<span class="mandatorySign">*</span></label>
+												<select disabled formControlName="doctorId" class="form-control" [ngClass]="{ 'is-invalid': showErrors && !claimUpdateForm.controls.doctorId.valid }">
+													<option value="">Select Doctor...</option>
+													<option *ngFor="let doctor of doctors" [value]="doctor.id">{{doctor.first_name}} {{doctor.last_name}}</option>
+												</select>
+												<div *ngIf="showErrors && !claimUpdateForm.controls.doctorId.valid" class="invalid-feedback"> 
+													{{ attributes.doctorId }}
+												</div>
+												
+                    </div>
+                </div>
+                
+                <div class="form-group row">
+										<div class="col-sm-6 mb-3 mb-sm-0">
+                        <label class="titleBold">Medpro<span class="mandatorySign">*</span></label>
+												<select disabled formControlName="medproId" class="form-control" [ngClass]="{ 'is-invalid': showErrors && !claimUpdateForm.controls.medproId.valid }">
+													<option value="">Select Medpro...</option>
+													<option *ngFor="let medpro of medpros" [value]="medpro.id">{{medpro.first_name}} {{medpro.last_name}}</option>
+												</select>
+												<div *ngIf="showErrors && !claimUpdateForm.controls.medproId.valid" class="invalid-feedback"> 
+													{{ attributes.medproId }}
+												</div>
+												
+                    </div>
+                    <div class="col-sm-6">
+											<label class="titleBold">Supplementary Wcab No.<span class="mandatorySign">*</span></label>
+                        <input readonly type="text" class="form-control" id="inputClaimNo" placeholder="Supplementary Wcab..." formControlName="supplementaryWcabno" >
+														
+                    </div>
+                </div>
+								
+                <input type="hidden" class="form-control" id="inputId" formControlName="patientId">          
+								<button type="submit" class="btn btn-primary btn-block">
+										<span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+										Update Patient
+								</button>
+                <hr>                
+              </form> 
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

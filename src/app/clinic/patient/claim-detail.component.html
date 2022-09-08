@@ -1,0 +1,138 @@
+<div class="container-fluid">
+  <!-- Page Heading -->
+  <div class="d-sm-flex align-items-center justify-content-between mb-4">
+	<h1 class="h3 mb-0 text-gray-800">Claim Detail</h1>
+	<button class="btn btn-primary" (click)="backClicked();">BACK</button>
+  </div>
+	<!--<tr *ngFor="let doctor of doctors">
+      <th>{{doctor.first_name}}</th>
+	</tr>-->
+  <!-- Content Row -->
+  <div class="row">
+	<div class="col-xl-12 col-md-12 mb-4">
+      <div class="card shadow h-100 py-2">
+        <div class="card-body">
+          <div class="row no-gutters align-items-center">
+            <div class="col ">
+								<form class="" [formGroup]="claimDetailForm" novalidate>
+                <div class="form-group row">
+                    <div class="col-sm-6 mb-3 mb-sm-0">
+											<label class="titleBold">First Name <span class="mandatorySign">*</span></label>
+                        <input type="text" class="form-control" readonly id="inputFirstName" aria-describedby="newPasswordHelp" placeholder="First Name..." formControlName="firstName" [ngClass]="{ 'is-invalid': showErrors && !claimDetailForm.controls.firstName.valid }">
+												<div *ngIf="showErrors && !claimDetailForm.controls.firstName.valid" class="invalid-feedback"> 
+													{{ attributes.firstName }}
+												</div>
+                    </div>
+																				
+                    <div class="col-sm-6">
+											<label class="titleBold">Last Name <span class="mandatorySign">*</span></label>
+                        <input type="text" class="form-control" readonly id="inputLastName" aria-describedby="newPasswordHelp" placeholder="Last Name..." formControlName="lastName" [ngClass]="{ 'is-invalid': showErrors && !claimDetailForm.controls.lastName.valid }">
+												<div *ngIf="showErrors && !claimDetailForm.controls.lastName.valid" class="invalid-feedback"> 
+													{{ attributes.lastName }}
+												</div>				
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-6 mb-3 mb-sm-0">
+											<label class="titleBold">Date of Birth</label>
+												<input type="date" class="form-control" readonly id="inputDateOfBirth" aria-describedby="newPasswordHelp" formControlName="dateOfBirth" [ngClass]="{ 'is-invalid': showErrors && !claimDetailForm.controls.dateOfBirth.valid }">
+												<div *ngIf="showErrors && !claimDetailForm.controls.dateOfBirth.valid" class="invalid-feedback"> 
+													{{ attributes.dateOfBirth }}
+												</div>		
+                    </div>
+                    <div class="col-sm-6">
+											<label class="titleBold">Contact Info</label>
+												<input type="text" class="form-control" readonly id="inputContactInfo" aria-describedby="newPasswordHelp" placeholder="Conatct Info..." formControlName="contctInfo" [ngClass]="{ 'is-invalid': showErrors && !claimDetailForm.controls.contctInfo.valid }">
+												<div *ngIf="showErrors && !claimDetailForm.controls.contctInfo.valid" class="invalid-feedback"> 
+													{{ attributes.contctInfo }}
+												</div>	
+                    </div>
+                </div>
+                <div class="form-group row">
+										<div class="col-sm-6 mb-3 mb-sm-0">
+											<label class="titleBold">WCAB No <span class="mandatorySign">*</span></label>
+                        <input type="text" class="form-control" readonly id="inputCaseNo" placeholder="WCAB No..." formControlName="caseNo" [ngClass]="{ 'is-invalid': showErrors && !claimDetailForm.controls.caseNo.valid }">
+												<div *ngIf="showErrors && !claimDetailForm.controls.caseNo.valid" class="invalid-feedback"> 
+													{{ attributes.caseNo }}
+												</div>										
+													
+                    </div>									
+                    <div class="col-sm-6">
+												<label class="titleBold">Claim No <span class="mandatorySign">*</span> </label>
+                        <input type="text" class="form-control" readonly id="inputClaimNo" placeholder="Claim No..." formControlName="claimNo" [ngClass]="{ 'is-invalid': showErrors && !claimDetailForm.controls.claimNo.valid }">
+												<div *ngIf="showErrors && !claimDetailForm.controls.claimNo.valid" class="invalid-feedback"> 
+													{{ attributes.claimNo }}
+												</div>					
+                    </div>
+                </div>
+                
+                <div class="form-group row">
+										<div class="col-sm-6 mb-3 mb-sm-0">
+											<label class="titleBold">Applicant Attorney</label>
+                        <input type="text" class="form-control" disabled id="inputAppAttorney" placeholder="Applicant Attorney..." formControlName="appAttorney" [ngClass]="{ 'is-invalid': showErrors && !claimDetailForm.controls.appAttorney.valid }">
+												<div *ngIf="showErrors && !claimDetailForm.controls.appAttorney.valid" class="invalid-feedback"> 
+													{{ attributes.appAttorney }}
+												</div>			
+                    </div>									
+                    <div class="col-sm-6">
+											<label class="titleBold">Employer</label>
+                        <input type="text" class="form-control" disabled id="inputEmployer" placeholder="Employer..." formControlName="employer" [ngClass]="{ 'is-invalid': showErrors && !claimDetailForm.controls.employer.valid }">
+												<div *ngIf="showErrors && !claimDetailForm.controls.employer.valid" class="invalid-feedback"> 
+													{{ attributes.employer }}
+												</div>						
+                    </div>
+                </div>
+                
+                <div class="form-group row">
+                    <div class="col-sm-6 mb-3 mb-sm-0">
+											<label class="titleBold">Defendant Attorney</label>
+                        <input type="text" class="form-control" disabled id="inputDefAttorney" placeholder="Defendant Attorney..." formControlName="defAttorney" [ngClass]="{ 'is-invalid': showErrors && !claimDetailForm.controls.defAttorney.valid }">
+												<div *ngIf="showErrors && !claimDetailForm.controls.defAttorney.valid" class="invalid-feedback"> 
+													{{ attributes.defAttorney }}
+												</div>	
+                    </div>									
+                    <div class="col-sm-6">
+                        <label class="titleBold">Doctor <span class="mandatorySign">*</span> </label>
+												<select formControlName="doctorId" disabled class="form-control">
+													<option value="">Select Doctor...</option>
+													<option *ngFor="let doctor of doctors" [value]="doctor.id">{{doctor.first_name}} {{doctor.last_name}}</option>
+												</select>
+												<div *ngIf="showErrors && !claimDetailForm.controls.doctorId.valid" class="invalid-feedback"> 
+													{{ attributes.doctorId }}
+												</div>
+												
+                    </div>
+                </div>
+                
+                <div class="form-group row">
+										<div class="col-sm-6 mb-3 mb-sm-0">
+                        <label class="titleBold">Medpro <span class="mandatorySign">*</span> </label>
+												<select formControlName="medproId" disabled class="form-control">
+													<option value="">Select Medpro...</option>
+													<option *ngFor="let medpro of medpros" [value]="medpro.id">{{medpro.first_name}} {{medpro.last_name}}</option>
+												</select>
+												<div *ngIf="showErrors && !claimDetailForm.controls.medproId.valid" class="invalid-feedback"> 
+													{{ attributes.medproId }}
+												</div>
+												
+                    </div>
+										<!--<div class="col-sm-6 mb-3 mb-sm-0">
+											<input type="file" (change)="upload($event)">
+											<button class="btn btn-danger">Upload</button>
+											
+										</div>-->
+                </div>              
+                
+								<!--<button type="submit" class="btn btn-primary btn-block">
+										<span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+										Register Patient and Claim
+								</button>-->
+                <hr>                
+              </form> 
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

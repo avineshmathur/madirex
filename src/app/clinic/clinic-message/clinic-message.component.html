@@ -1,0 +1,68 @@
+<div class="container-fluid">
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+      <h1 class="h3 mb-0 text-gray-800">Send Message</h1>
+    </div>
+      <!--<tr *ngFor="let doctor of doctors">
+        <th>{{doctor.first_name}}</th>
+      </tr>-->
+    <!-- Content Row -->
+    <div class="row">
+      <div class="col-xl-12 col-md-12 mb-4">
+        <div class="card shadow h-100 py-2">
+          <div class="card-body">
+            <div class="row no-gutters align-items-center">
+              <div class="col-xl-8 col-md-8 mb-4 ">
+                  <form class="" [formGroup]="sendMessageForm" (ngSubmit)="submit()" novalidate>
+                    <div class="form-group row">
+                    
+                      <input [disabled]="true" type="text" value="{{senderName}}" class="form-control"  >
+                      
+                  </div>
+                    <div class="form-group row">
+										
+                        <select formControlName="user" class="form-control" (change)="onChangeUser($event.target.value)"  [ngClass]="{ 'is-invalid': showErrors && !sendMessageForm.controls.user.valid }">
+                            <option value="">Select Receiver User...</option>
+                            <option *ngFor="let user of users" [value]="user.id">{{user.first_name + ' ' + user.last_name}}</option>
+                        </select>
+                        <div *ngIf="showErrors && !sendMessageForm.controls.user.valid" class="invalid-feedback"> 
+                            {{ attributes.id }}
+                        </div>
+                    </div>  
+                    <div class="form-group row">
+                          <input type="text" class="form-control" id="inputSubject" aria-describedby="newPasswordHelp" placeholder="Subject..." formControlName="subject" [ngClass]="{ 'is-invalid': showErrors && !sendMessageForm.controls.subject.valid }">
+                          <div *ngIf="showErrors && !sendMessageForm.controls.subject.valid" class="invalid-feedback"> 
+                              {{ attributes.subject }}
+                          </div>
+                      </div>
+                      
+                      <div class="form-group row">   
+                        <ckeditor id="inputMessage" style="width:100%" aria-describedby="newPasswordHelp" placeholder="Message..." formControlName="message"  [ngClass]="{ 'is-invalid': showErrors && !sendMessageForm.controls.message.valid }" >
+
+                          
+                        </ckeditor>
+                        <div *ngIf="showErrors && !sendMessageForm.controls.message.valid" class="invalid-feedback"> 
+                          {{ attributes.message }}
+                      </div>
+                                    
+                          <!-- <textarea type="textarea" id="inputMessage" aria-describedby="newPasswordHelp" placeholder="Message..." formControlName="message" rows="8" cols="100" [ngClass]="{ 'is-invalid': showErrors && !sendMessageForm.controls.message.valid }"></textarea>
+                          <div *ngIf="showErrors && !sendMessageForm.controls.message.valid" class="invalid-feedback"> 
+                              {{ attributes.message }}
+                          </div>	 -->
+                      </div> 
+                        <input type="hidden" class="form-control" id="inputId" formControlName="useremail">
+                                              <input type="hidden" class="form-control" id="inputId" formControlName="fromuser">
+                                              <input type="hidden" class="form-control" id="inputId" formControlName="touser">     
+                                              <button type="submit" class="btn btn-primary btn-block">
+                          <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                              Send Message
+                      </button>
+                      <hr>                
+                </form> 
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

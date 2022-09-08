@@ -1,0 +1,147 @@
+<div class="container-fluid">
+  <!-- Page Heading -->
+  <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Business Setup</h1>
+  </div>
+	<!--<tr *ngFor="let country of countries">
+      <th>{{country.name}}</th>
+	</tr>-->
+  <!-- Content Row -->
+  <div class="row">
+	<div class="col-xl-12 col-md-12 mb-4">
+      <div class="card shadow h-100 py-2">
+        <div class="card-body">
+          <div class="row no-gutters align-items-center">
+            <div class="col ">
+            	<form class="" [formGroup]="businessSetupForm" (ngSubmit)="submit()" novalidate>
+                <div class="form-group">
+									<label class="titleBold">Clinic Name<span class="mandatorySign">*</span></label>
+					<input type="text" class="form-control" id="inputClinicName" aria-describedby="newPasswordHelp" placeholder="Clinic Name..." formControlName="clinicName" [ngClass]="{ 'is-invalid': showErrors && !businessSetupForm.controls.clinicName.valid }" readonly>
+      				<div *ngIf="showErrors && !businessSetupForm.controls.clinicName.valid" class="invalid-feedback"> 
+   						{{ attributes.clinicName }}
+					</div> 
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-6 mb-3 mb-sm-0">
+										<label class="titleBold">First Name<span class="mandatorySign">*</span></label>
+                    <input type="text" class="form-control" id="inputFirstName" aria-describedby="newPasswordHelp" placeholder="First Name..." formControlName="firstName" [ngClass]="{ 'is-invalid': showErrors && !businessSetupForm.controls.firstName.valid }">
+					<div *ngIf="showErrors && !businessSetupForm.controls.firstName.valid" class="invalid-feedback"> 
+   						{{ attributes.firstName }}
+					</div>
+                  </div>
+									
+                  <div class="col-sm-6">
+										<label class="titleBold">Last Name<span class="mandatorySign">*</span></label>
+                    <input type="text" class="form-control" id="inputLastName" aria-describedby="newPasswordHelp" placeholder="Last Name..." formControlName="lastName" [ngClass]="{ 'is-invalid': showErrors && !businessSetupForm.controls.lastName.valid }">
+					<div *ngIf="showErrors && !businessSetupForm.controls.lastName.valid" class="invalid-feedback"> 
+   						{{ attributes.lastName }}
+					</div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-6 mb-3 mb-sm-0">
+											<label class="titleBold">Email Address<span class="mandatorySign">*</span></label>
+                        <input type="email" class="form-control" id="inputEmailAddress" aria-describedby="newPasswordHelp" placeholder="Email Address..." formControlName="emailAddress" [ngClass]="{ 'is-invalid': showErrors && !businessSetupForm.controls.emailAddress.valid }" readonly>
+                        <div *ngIf="showErrors && !businessSetupForm.controls.emailAddress.valid" class="invalid-feedback"> 
+                            {{ attributes.emailAddress }}
+                        </div> 
+                    </div>
+                    <div class="col-sm-6">
+											<label class="titleBold">Phone Number<span class="mandatorySign">*</span></label>
+						<input type="text" class="form-control" id="inputPhoneNumber" aria-describedby="newPasswordHelp" placeholder="Phone Number...(Eg:-0000000000)" formControlName="phoneNumber" [ngClass]="{ 'is-invalid': showErrors && !businessSetupForm.controls.phoneNumber.valid }">
+						<div *ngIf="showErrors && !businessSetupForm.controls.phoneNumber.valid" class="invalid-feedback"> 
+   							{{ attributes.phoneNumber }}
+						</div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+									<label class="titleBold">Address<span class="mandatorySign">*</span></label>
+									<input type="text" class="form-control" id="inputAddress" aria-describedby="newPasswordHelp" placeholder="Address..." formControlName="address" [ngClass]="{ 'is-invalid': showErrors && !businessSetupForm.controls.address.valid }">
+									<div *ngIf="showErrors && !businessSetupForm.controls.address.valid" class="invalid-feedback"> 
+											{{ attributes.address }}
+									</div>
+                </div>
+                
+                <div class="form-group row">
+                    <div class="col-sm-6 mb-3 mb-sm-0">
+											<label class="titleBold">Country<span class="mandatorySign">*</span></label>
+                        <select formControlName="country" readonly class="form-control" (change)="onChangeCountry($event.target.value)" ng-dropdown required>
+                            <option value="">Select country...</option>
+                            <option *ngFor="let country of countries" [value]="country.id">{{country.name}}</option>
+                        </select>
+                        <div *ngIf="showErrors && !businessSetupForm.controls.country.valid" class="invalid-feedback"> 
+                            {{ attributes.countryId }}
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+											<label class="titleBold">State<span class="mandatorySign">*</span></label>
+                        <select formControlName="state" readonly class="form-control" (change)="onChangeState($event.target.value)" ng-dropdown required>
+                            <option value="">Select state...</option>
+                            <option *ngFor="let state of states" [value]="state.id">{{state.name}}</option>
+                        </select>
+                        <div *ngIf="showErrors && !businessSetupForm.controls.state.valid" class="invalid-feedback"> 
+                            {{ attributes.stateId }}
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group row">
+                    <div class="col-sm-6 mb-3 mb-sm-0">
+											<label class="titleBold">City<span class="mandatorySign">*</span></label>
+											<select formControlName="city" readonly class="form-control" ng-dropdown required>
+												<option value="">Select city...</option>
+												<option *ngFor="let city of cities" [value]="city.id">{{city.name}}</option>
+											</select>
+											<div *ngIf="showErrors && !businessSetupForm.controls.city.valid" class="invalid-feedback"> 
+													{{ attributes.city }}
+											</div>
+                    </div>
+                    <div class="col-sm-6">
+											<label class="titleBold">Zip<span class="mandatorySign">*</span></label>
+                      <input type="text" class="form-control" id="inputZipCode" aria-describedby="newPasswordHelp" placeholder="Zip Code..." formControlName="zipCode" [ngClass]="{ 'is-invalid': showErrors && !businessSetupForm.controls.zipCode.valid }">
+											<div *ngIf="showErrors && !businessSetupForm.controls.zipCode.valid" class="invalid-feedback"> 
+													{{ attributes.zipCode }}
+											</div>
+                    </div>
+                </div>
+								
+								<div class="form-group row">
+									 <div class="col-sm-6 mb-3 mb-sm-0">
+											<!--<label>Profile</label>-->
+											<input type="file" (change)="fileChangeEvent($event)" formControlName="clinicLogo"
+												accept=".png, .jpg, .jpeg" />
+												<small *ngIf="fileSizeValidation" class="text-danger">
+													{{ fileSizeValidation }}
+												</small>
+									 </div>
+								</div>
+								<div class="text-center col-md-6">
+									<div style="display: flex;
+							justify-content: center;
+							width: 100%">
+							<image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true"
+								[aspectRatio]="1/1" format="png"   [resizeToWidth]="172" 
+								(imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded()"
+								(cropperReady)="cropperReady()" (loadImageFailed)="loadImageFailed()"></image-cropper>
+						</div>
+					</div>
+					<div class="text-center col-md-6">
+
+						<img [src]="croppedImage" />
+					</div>
+                
+                <button type="submit" class="btn btn-primary btn-block">
+					<span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+						Update Business Detail
+				</button>
+                <hr>
+               
+              </form> 
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

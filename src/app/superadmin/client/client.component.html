@@ -1,0 +1,87 @@
+<!-- Begin Page Content -->
+        <div class="container-fluid">
+
+          <!-- Page Heading -->
+          <h1 class="h3 mb-2 text-gray-800">Clinics</h1>
+          <!--<p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p>-->
+
+          <!-- DataTales Example -->
+          <div class="card shadow mb-4">
+            <div class="card-header py-3">
+              <p style="float: left;">
+              <a routerLink="/superadmin/client-archived" class="btn btn-warning btn-icon-split">
+                <span class="icon text-white-50">
+                  <i class="fas fa-user"></i>
+                </span>
+                <span class="text">Archived Clinic</span>
+              </a>
+              </p>
+              <p style="float: right;">
+              <a routerLink="/superadmin/client-register" class="btn btn-success btn-icon-split">
+                <span class="icon text-white-50">
+                  <i class="fas fa-plus"></i>
+                </span>
+                <span class="text">Add New Clinic</span>
+              </a>
+              </p>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-bordered" width="100%" cellspacing="0" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+                  <thead>
+                    <tr>
+                      <th>Clinic Name</th>
+                      <th>Name</th>
+                      <th>Email</th>
+                      <th>Keyword</th>
+                      <th>Phone</th>
+                      <th>End Date</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <!--<tfoot>
+                    <tr>
+                      <th>Name</th>
+                      <th>Position</th>
+                      <th>Office</th>
+                      <th>Age</th>
+                      <th>Start date</th>
+                      <th>Salary</th>
+                    </tr>
+                  </tfoot>-->
+                  <tbody>
+                   
+                    <tr *ngFor="let client of clients;let rowIndex = index">
+                      <th>{{client.clinic_name}}</th>
+                      <td>{{client.first_name}} {{client.last_name}}</td>
+                      <td>{{client.email}}</td>
+                      <td>{{client.keyword}}</td>
+                      <td>{{client.phone_number}}</td>
+                      <td>{{client.end_date | date:'yyyy-MM-dd'}}</td>
+                      <td>
+                         <a routerLink="/superadmin/client-update/{{client.id}}" class="btn btn-info btn-circle btn-sm">
+                          <i class="fas fa-edit"></i>
+                        </a>&nbsp;
+                        <a routerLink="/superadmin/send-message/{{client.id}}" class="btn btn-info btn-circle btn-sm">
+                          <i class="fas fa-envelope"></i>
+                        </a>&nbsp;
+                        <a *ngIf="client.status == 'inactive'" (click)="onUpdateStatus(client.id)" class="btn btn-warning btn-circle btn-sm">
+                          <i class="fas fa-toggle-on"></i>
+                        </a>
+                        <a *ngIf="client.status == 'active'" (click)="onUpdateStatus(client.id)" class="btn btn-success btn-circle btn-sm">
+                          <i class="fas fa-toggle-on"></i>
+                        </a>&nbsp;                       
+                        <a (click)="onDelete(client.id,rowIndex)" class="btn btn-danger btn-circle btn-sm">
+                          <i class="fas fa-trash"></i>
+                        </a>
+                      </td>
+                    </tr>
+                   
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <!-- /.container-fluid -->
